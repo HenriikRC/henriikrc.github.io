@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamburg Weekend Planner for Beli</title>
+  <style>
+    :root {
+      --yellow: #f5d547;
+      --soft-yellow: #fff6bf;
+      --green: #6a9f58;
+      --dark-green: #355b2f;
+      --cream: #fffdf6;
+      --text: #24301f;
+      --muted: rgba(36, 48, 31, 0.72);
+      --card: rgba(255, 255, 255, 0.88);
+      --shadow: 0 18px 45px rgba(53, 91, 47, 0.16);
+      --radius: 26px;
+      --blue: #dff2ff;
+      --terracotta: #f0a47b;
+      --pink: #ffe3e8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(245, 213, 71, 0.36), transparent 32%),
+        radial-gradient(circle at 85% 5%, rgba(223, 242, 255, 0.92), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(106, 159, 88, 0.22), transparent 34%),
+        linear-gradient(135deg, #fffdf6 0%, #f7f7eb 100%);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 60px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(53, 91, 47, 0.09);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: clamp(28px, 5vw, 50px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "beli";
+      position: absolute;
+      right: -22px;
+      bottom: -50px;
+      font-size: 10rem;
+      font-weight: 900;
+      letter-spacing: -0.1em;
+      color: rgba(245, 213, 71, 0.18);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--soft-yellow);
+      color: var(--dark-green);
+      border: 1px solid rgba(53, 91, 47, 0.12);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.35rem, 7vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 9ch;
+    }
+
+    h2,
+    h3 {
+      letter-spacing: -0.03em;
+    }
+
+    .highlight {
+      color: var(--dark-green);
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    .highlight::after {
+      content: "";
+      position: absolute;
+      left: -0.04em;
+      right: -0.04em;
+      bottom: 0.07em;
+      height: 0.35em;
+      background: rgba(245, 213, 71, 0.48);
+      z-index: -1;
+      border-radius: 999px;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      max-width: 62ch;
+      margin: 0 0 16px;
+      color: rgba(36, 48, 31, 0.88);
+    }
+
+    .mini-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .hero-panel {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 25% 15%, rgba(245, 213, 71, 0.32), transparent 25%),
+        radial-gradient(circle at 78% 80%, rgba(106, 159, 88, 0.16), transparent 28%),
+        linear-gradient(145deg, rgba(255,255,255,0.94), rgba(255,246,191,0.48));
+    }
+
+    .polaroid-stack {
+      min-height: 356px;
+      position: relative;
+    }
+
+    .polaroid {
+      position: absolute;
+      width: 58%;
+      min-height: 210px;
+      border-radius: 18px;
+      background: #fff;
+      padding: 12px 12px 46px;
+      box-shadow: 0 20px 35px rgba(53, 91, 47, 0.16);
+      transform-origin: center;
+    }
+
+    .polaroid:first-child {
+      left: 0;
+      top: 18px;
+      transform: rotate(-6deg);
+    }
+
+    .polaroid:nth-child(2) {
+      right: 0;
+      top: 66px;
+      transform: rotate(7deg);
+    }
+
+    .polaroid:nth-child(3) {
+      left: 19%;
+      bottom: 8px;
+      transform: rotate(-1.5deg);
+      z-index: 3;
+    }
+
+    .photo-slot {
+      height: 162px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: rgba(36, 48, 31, 0.62);
+      font-weight: 750;
+      background:
+        linear-gradient(135deg, rgba(245,213,71,0.38), rgba(223,242,255,0.9)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.4) 0 10px, transparent 10px 20px);
+      border: 1px dashed rgba(53, 91, 47, 0.24);
+    }
+
+    .photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .caption {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 12px;
+      text-align: center;
+      font-family: "Segoe Print", "Bradley Hand", cursive;
+      color: var(--dark-green);
+      font-weight: 700;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: clamp(22px, 4vw, 36px);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      margin: 0 0 5px;
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      color: var(--dark-green);
+    }
+
+    .section-subtitle {
+      margin: 0;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
+    .pill {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(106, 159, 88, 0.11);
+      color: var(--dark-green);
+      border: 1px solid rgba(53, 91, 47, 0.1);
+      font-weight: 750;
+      white-space: nowrap;
+      font-size: 0.9rem;
+    }
+
+    .photo-grid,
+    .idea-grid,
+    .vibe-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .photo-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .photo-card {
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(53, 91, 47, 0.1);
+      border-radius: 22px;
+      padding: 13px;
+    }
+
+    .photo-card .photo-slot {
+      height: 230px;
+    }
+
+    .file-label {
+      margin-top: 11px;
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--dark-green);
+      background: var(--soft-yellow);
+      border: 1px solid rgba(53, 91, 47, 0.12);
+    }
+
+    .file-label input {
+      display: none;
+    }
+
+    .idea-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .idea-card {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid rgba(53, 91, 47, 0.1);
+      background: rgba(255, 255, 255, 0.86);
+      padding: 18px;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .idea-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 30px rgba(53, 91, 47, 0.12);
+      border-color: rgba(53, 91, 47, 0.2);
+    }
+
+    .mandatory-card {
+      background:
+        linear-gradient(145deg, rgba(245, 213, 71, 0.28), rgba(255, 227, 232, 0.42)),
+        rgba(255, 255, 255, 0.9);
+      border-color: rgba(53, 91, 47, 0.2);
+    }
+
+    .mandatory-note {
+      margin-top: 13px;
+      border-top: 1px solid rgba(53, 91, 47, 0.08);
+      padding-top: 13px;
+      color: var(--dark-green);
+      font-weight: 850;
+    }
+
+    .idea-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .idea-emoji {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: linear-gradient(135deg, var(--soft-yellow), rgba(223, 242, 255, 0.8));
+      font-size: 1.55rem;
+      flex: 0 0 auto;
+    }
+
+    .idea-card h3 {
+      margin: 0 0 4px;
+      color: var(--dark-green);
+      font-size: 1.22rem;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0 14px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: rgba(36, 48, 31, 0.78);
+      background: rgba(245, 213, 71, 0.24);
+      border: 1px solid rgba(53, 91, 47, 0.08);
+    }
+
+    .ranker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 13px;
+      border-top: 1px solid rgba(53, 91, 47, 0.08);
+      padding-top: 13px;
+    }
+
+    .hearts {
+      display: flex;
+      gap: 4px;
+      flex-wrap: nowrap;
+    }
+
+    .heart {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(53, 91, 47, 0.08);
+      color: rgba(53, 91, 47, 0.42);
+      box-shadow: none;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      line-height: 1;
+      transition: 0.18s ease;
+    }
+
+    .heart:hover,
+    .heart.active {
+      background: linear-gradient(135deg, var(--yellow), #ffe2e8);
+      color: var(--dark-green);
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 8px 16px rgba(245, 213, 71, 0.26);
+    }
+
+    .score {
+      min-width: 5.5ch;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    .result-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .winner {
+      background: linear-gradient(145deg, rgba(245, 213, 71, 0.28), rgba(255,255,255,0.88));
+      border: 1px solid rgba(53, 91, 47, 0.12);
+      border-radius: 24px;
+      padding: 20px;
+    }
+
+    .winner h3 {
+      margin: 0 0 6px;
+      color: var(--dark-green);
+    }
+
+    .ranked-list {
+      margin: 14px 0 0;
+      padding-left: 22px;
+    }
+
+    .ranked-list li {
+      margin: 7px 0;
+      color: rgba(36, 48, 31, 0.82);
+    }
+
+    .vibe-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .vibe {
+      background: rgba(255,255,255,0.78);
+      border-radius: 22px;
+      padding: 18px;
+      border: 1px solid rgba(53, 91, 47, 0.09);
+    }
+
+    .vibe strong {
+      display: block;
+      color: var(--dark-green);
+      margin-bottom: 5px;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    label.form-label {
+      display: grid;
+      gap: 8px;
+      font-weight: 800;
+      color: var(--dark-green);
+    }
+
+    textarea,
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 1px solid rgba(53, 91, 47, 0.18);
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    textarea:focus,
+    input[type="text"]:focus,
+    select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(106, 159, 88, 0.14);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .primary-button,
+    .secondary-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 20px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .primary-button {
+      color: var(--dark-green);
+      background: linear-gradient(135deg, var(--yellow), #f3e98b);
+      box-shadow: 0 12px 24px rgba(245, 213, 71, 0.28);
+    }
+
+    .secondary-button {
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--dark-green);
+      border: 1px solid rgba(53, 91, 47, 0.14);
+      box-shadow: none;
+    }
+
+    .primary-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .tiny {
+      font-size: 0.92rem;
+      color: rgba(36, 48, 31, 0.68);
+    }
+
+    .footer-note {
+      text-align: center;
+      margin: 18px 0 0;
+      color: rgba(36, 48, 31, 0.62);
+      font-size: 0.92rem;
+    }
+
+    .henrik-peek {
+      position: fixed;
+      right: -120px;
+      bottom: 28px;
+      width: 120px;
+      height: 140px;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0;
+      transition:
+        right 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.5s ease;
+    }
+
+    .henrik-peek.show {
+      right: -18px;
+      opacity: 1;
+    }
+
+    .henrik-avatar {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 100px;
+      height: 100px;
+      border-radius: 50% 50% 46% 46%;
+      background: linear-gradient(180deg, #6a9f58 0%, #355b2f 100%);
+      box-shadow: 0 12px 30px rgba(53, 91, 47, 0.18);
+      display: grid;
+      place-items: center;
+    }
+
+    .henrik-face {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      background: #f4d7bf;
+      border-radius: 50%;
+      box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .henrik-face::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 8px;
+      right: 8px;
+      height: 26px;
+      background: linear-gradient(180deg, #c8a46b 0%, #7a5a3a 100%);
+      border-radius: 999px 999px 14px 14px;
+    }
+
+    .henrik-glasses {
+      position: absolute;
+      top: 30px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .henrik-glasses span {
+      width: 20px;
+      height: 16px;
+      border: 2px solid #24301f;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .henrik-glasses::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      width: 10px;
+      height: 2px;
+      background: #24301f;
+      transform: translateX(-50%);
+    }
+
+    .henrik-eyes {
+      position: absolute;
+      top: 32px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1;
+    }
+
+    .henrik-eyes span {
+      width: 10px;
+      height: 10px;
+      background: #24301f;
+      border-radius: 50%;
+      animation: blink 5.5s infinite;
+    }
+
+    .henrik-stache {
+      position: absolute;
+      left: 50%;
+      top: 46px;
+      width: 26px;
+      height: 10px;
+      transform: translateX(-50%);
+    }
+
+    .henrik-stache::before,
+    .henrik-stache::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 14px;
+      height: 8px;
+      background: #5b3a29;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .henrik-stache::before {
+      left: 0;
+      transform: rotate(10deg);
+    }
+
+    .henrik-stache::after {
+      right: 0;
+      transform: rotate(-10deg);
+    }
+
+    @keyframes blink {
+      0%, 45%, 47%, 100% { transform: scaleY(1); }
+      46% { transform: scaleY(0.15); }
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .result-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-grid,
+      .vibe-grid,
+      .idea-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .polaroid-stack {
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 22px, 1120px);
+        padding-top: 18px;
+      }
+
+      .polaroid {
+        width: 64%;
+      }
+
+      .photo-slot {
+        height: 142px;
+      }
+
+      .photo-card .photo-slot {
+        height: 260px;
+      }
+
+      .ranker {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .score {
+        text-align: left;
+      }
+
+      .heart {
+        width: 32px;
+        height: 32px;
+      }
+
+      .henrik-peek {
+        transform: scale(0.82);
+        transform-origin: bottom right;
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="card hero-copy">
+        <div class="badge">🚂 Hamburg weekend HQ</div>
+        <h1>
+          Beli, shall we <span class="highlight">choose our Hamburg adventure</span>?
+        </h1>
+        <p class="lead">
+          Since the second-second date website deserves a little software update, this is now our tiny weekend command center for Hamburg.
+        </p>
+        <p class="lead">
+          The mission is simple: rank what sounds best, and let the algorithm conclude what we already know, that I mostly just want to be there with you.
+        </p>
+        <p class="mini-note">
+          P.S. This ranking system is legally non-binding, emotionally persuasive, and probably over-engineered.
+        </p>
+      </div>
+
+      <div class="card hero-panel" aria-label="Photo preview">
+        <div class="polaroid-stack">
+          <div class="polaroid">
+            <div class="photo-slot" data-photo-preview="photo-1">
+              <img src="photos/us-6.JPG" alt="Us together">
+            </div>
+          </div>
+          <div class="polaroid">
+            <div class="photo-slot" data-photo-preview="photo-2">
+            <img src="photos/us-3.jpeg" alt="Us together">
+            </div>
+          </div>
+          <div class="polaroid">
+            <div class="photo-slot" data-photo-preview="photo-3">
+              <img src="photos/us-4.jpeg" alt="Us together">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Pictures of us</h2>
+          
+        <span class="pill">📸 Supermodels</span>
+      </div>
+
+      <div class="photo-grid">
+        <div class="photo-card">
+          <div class="photo-slot" data-photo-preview="photo-1">
+            <img src="photos/us-1.jpeg" alt="Us together">
+          </div>
+        </div>
+        <div class="photo-card">
+          <div class="photo-slot" data-photo-preview="photo-2">
+            <img src="photos/us-2.jpg" alt="Us together">
+          </div>
+        </div>
+        <div class="photo-card">
+          <div class="photo-slot" data-photo-preview="photo-3">
+            <img src="photos/us-5.JPG" alt="Us together">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Hamburg ideas to rank</h2>
+          <p class="section-subtitle">
+            Click the hearts. The page saves the scores and sorts your favorites below.
+          </p>
+        </div>
+        <span class="pill">💛 1–5 hearts</span>
+      </div>
+
+      <div class="idea-grid" id="ideaGrid">
+        <article class="idea-card" data-idea="Speicherstadt">
+          <div class="idea-top">
+            <div>
+              <h3>Speicherstadt</h3>
+              <p>Red-brick warehouses, canals, bridges, little photo stops, and a very valid excuse for a drink.</p>
+            </div>
+            <div class="idea-emoji">🏛️</div>
+          </div>
+          <div class="meta">
+            <span class="tag">lowkey</span>
+            <span class="tag">photo-friendly</span>
+            <span class="tag">daytime</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card" data-idea="Miniatur Wunderland">
+          <div class="idea-top">
+            <div>
+              <h3>Miniatur Wunderland</h3>
+              <p>Tiny trains, tiny worlds, and me pretending this was not added because I am a nerd.</p>
+            </div>
+            <div class="idea-emoji">🚂</div>
+          </div>
+          <div class="meta">
+            <span class="tag">book ahead</span>
+            <span class="tag">rain-safe</span>
+            <span class="tag">nerdy cute</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card" data-idea="Elbphilharmonie Plaza">
+          <div class="idea-top">
+            <div>
+              <h3>Elbphilharmonie Plaza</h3>
+              <p>Views over the harbour, a fancy-feeling building, and a perfect “look at us being cultured” moment.</p>
+            </div>
+            <div class="idea-emoji">🎼</div>
+          </div>
+          <div class="meta">
+            <span class="tag">views</span>
+            <span class="tag">short stop</span>
+            <span class="tag">golden hour</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card" data-idea="Harbour ferry or boat tour">
+          <div class="idea-top">
+            <div>
+              <h3>Harbour ferry / boat tour</h3>
+              <p>Landungsbrücken, water, harbour lights, and me probably saying “this is nice” 14 times.</p>
+            </div>
+            <div class="idea-emoji">⛴️</div>
+          </div>
+          <div class="meta">
+            <span class="tag">classic Hamburg</span>
+            <span class="tag">romantic-ish</span>
+            <span class="tag">bring jacket</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card" data-idea="Planten un Blomen">
+          <div class="idea-top">
+            <div>
+              <h3>Planten un Blomen</h3>
+              <p>A calm park walk for flowers, benches, and soft “we are in our own little world” energy.</p>
+            </div>
+            <div class="idea-emoji">🌿</div>
+          </div>
+          <div class="meta">
+            <span class="tag">green</span>
+            <span class="tag">slow date</span>
+            <span class="tag">sunny weather</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card" data-idea="Sternschanze dinner and drinks">
+          <div class="idea-top">
+            <div>
+              <h3>Sternschanze dinner + drinks</h3>
+              <p>A casual neighbourhood evening: food, drinks, people-watching, and no need to be overly fancy.</p>
+            </div>
+            <div class="idea-emoji">🍷</div>
+          </div>
+          <div class="meta">
+            <span class="tag">evening</span>
+            <span class="tag">cozy</span>
+            <span class="tag">flexible</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card" data-idea="Alster lake walk">
+          <div class="idea-top">
+            <div>
+              <h3>Alster lake walk</h3>
+              <p>White boats, water, hand-holding potential, and a simple walk that can become the nicest part of the day.</p>
+            </div>
+            <div class="idea-emoji">🦢</div>
+          </div>
+          <div class="meta">
+            <span class="tag">simple</span>
+            <span class="tag">talking time</span>
+            <span class="tag">free</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card" data-idea="Alter Elbtunnel">
+          <div class="idea-top">
+            <div>
+              <h3>Alter Elbtunnel</h3>
+              <p>A walk under the Elbe, old tiles, harbour views on the other side, and a very Hamburg little adventure.</p>
+            </div>
+            <div class="idea-emoji">🚇</div>
+          </div>
+          <div class="meta">
+            <span class="tag">classic Hamburg</span>
+            <span class="tag">photo-friendly</span>
+            <span class="tag">short stop</span>
+          </div>
+          <div class="ranker" data-ranker></div>
+        </article>
+
+        <article class="idea-card mandatory-card">
+          <div class="idea-top">
+            <div>
+              <h3>Fancy Saturday dinner</h3>
+              <p>This one is not up for democratic voting. Saturday evening gets a proper dinner, nice clothes and good food.</p>
+            </div>
+            <div class="idea-emoji">🥂</div>
+          </div>
+          <div class="meta">
+            <span class="tag">mandatory</span>
+            <span class="tag">Saturday evening</span>
+            <span class="tag">proper date</span>
+          </div>
+          <div class="mandatory-note">Locked in by Henrik. Beli may only influence restaurant choice and outfit level.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">The algorithm has opinions</h2>
+          <p class="section-subtitle">Highest-ranked ideas appear here. Very official. Very scientific. Almost definitely peer reviewed.</p>
+        </div>
+        <span class="pill">🤓 ranking output</span>
+      </div>
+
+      <div class="result-panel">
+        <div class="winner">
+          <h3>Current winner</h3>
+          <p id="winnerText">No winner yet. Beli must click some hearts for science.</p>
+        </div>
+        <div class="winner">
+          <h3>Top ranked ideas</h3>
+          <ol class="ranked-list" id="rankedList">
+            <li>No rankings yet.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Possible weekend structure</h2>
+          <p class="section-subtitle">Not a strict itinerary. Just a soft plan so we can be spontaneous without becoming chaotic.</p>
+        </div>
+      </div>
+
+      <div class="vibe-grid">
+        <div class="vibe">
+          <strong>Friday</strong>
+          Arrive, check in, easy dinner, maybe one drink and a slow walk.
+        </div>
+        <div class="vibe">
+          <strong>Saturday morning</strong>
+          Speicherstadt, Miniatur Wunderland or Alster depending on weather.
+        </div>
+        <div class="vibe">
+          <strong>Saturday evening</strong>
+          Fancy dinner is mandatory. Afterwards: Sternschanze, St. Pauli, harbour lights, or whatever Beli’s ranking system demands.
+        </div>
+        <div class="vibe">
+          <strong>Sunday</strong>
+          Slow brunch, Alter Elbtunnel, Alster, or one final cozy walk before going home.
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Send the official Beli verdict</h2>
+          </div>
+      </div>
+
+      <form id="hamburg-form" action="https://formspree.io/f/mjgpzqqn" method="POST">
+        <input type="hidden" name="_subject" value="Hamburg weekend ranking from Beli 💛" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" id="rankingSummary" name="ranking_summary" />
+
+        <label class="form-label">
+          Name - still pretty sure I got this right ;)
+          <input type="text" name="name" value="Beli" readonly />
+        </label>
+
+        <label class="form-label">
+          General Hamburg vibe
+          <select name="hamburg_vibe">
+            <option>Sweet and lowkey</option>
+            <option>Weekend getaway mode</option>
+            <option>Chaotic cute adventure</option>
+            <option>Surprise me, henniiiii</option>
+          </select>
+        </label>
+
+        <label class="form-label">
+          Optional note to the travelling developer
+          <textarea name="note" placeholder="Eg. required snacks for the roadtrip or other notes"></textarea>
+        </label>
+
+        <div class="button-row">
+          <button class="primary-button" type="submit">Send Hamburg verdict 💛</button>
+          <button class="secondary-button" type="button" id="resetScores">Reset rankings</button>
+        </div>
+      </form>
+    </section>
+
+    <p class="footer-note">Built with yellow and green vibes, Hamburg dreams, and slightly too much effort, as tradition requires.</p>
+  </div>
+
+  <div class="henrik-peek" id="henrikPeek" aria-hidden="true">
+    <div class="henrik-avatar">
+      <div class="henrik-face">
+        <div class="henrik-glasses">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="henrik-eyes">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="henrik-stache"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "hamburgWeekendRankings";
+    const PHOTO_PREFIX = "hamburgWeekendPhoto:";
+
+    const getScores = () => {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch {
+        return {};
+      }
+    };
+
+    const setScores = (scores) => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+    };
+
+    const getIdeaCards = () => Array.from(document.querySelectorAll("[data-idea]"));
+
+    function renderRanker(card, score) {
+      const ranker = card.querySelector("[data-ranker]");
+      const idea = card.dataset.idea;
+      ranker.innerHTML = "";
+
+      const hearts = document.createElement("div");
+      hearts.className = "hearts";
+      hearts.setAttribute("aria-label", `Rank ${idea}`);
+
+      for (let i = 1; i <= 5; i += 1) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "heart" + (i <= score ? " active" : "");
+        button.textContent = "♥";
+        button.setAttribute("aria-label", `${i} out of 5 hearts`);
+        button.addEventListener("click", () => {
+          const scores = getScores();
+          scores[idea] = i;
+          setScores(scores);
+          renderAllRankers();
+          updateResults();
+        });
+        hearts.appendChild(button);
+      }
+
+      const scoreText = document.createElement("div");
+      scoreText.className = "score";
+      scoreText.textContent = score ? `${score}/5` : "Not ranked";
+
+      ranker.appendChild(hearts);
+      ranker.appendChild(scoreText);
+    }
+
+    function renderAllRankers() {
+      const scores = getScores();
+      getIdeaCards().forEach(card => renderRanker(card, Number(scores[card.dataset.idea] || 0)));
+    }
+
+    function updateResults() {
+      const scores = getScores();
+      const ranked = Object.entries(scores)
+        .filter(([, score]) => Number(score) > 0)
+        .sort((a, b) => Number(b[1]) - Number(a[1]) || a[0].localeCompare(b[0]));
+
+      const winnerText = document.getElementById("winnerText");
+      const rankedList = document.getElementById("rankedList");
+      const rankingSummary = document.getElementById("rankingSummary");
+
+      if (!ranked.length) {
+        winnerText.textContent = "No winner yet. Beli must click some hearts for science.";
+        rankedList.innerHTML = "<li>No rankings yet.</li>";
+        rankingSummary.value = "No rankings yet.";
+        return;
+      }
+
+      const [winner, winnerScore] = ranked[0];
+      winnerText.textContent = `${winner} is currently winning with ${winnerScore}/5 hearts. The algorithm approves.`;
+      rankedList.innerHTML = ranked
+        .map(([idea, score]) => `<li><strong>${idea}</strong> — ${score}/5 hearts</li>`)
+        .join("");
+
+      rankingSummary.value = ranked
+        .map(([idea, score], index) => `${index + 1}. ${idea}: ${score}/5`)
+        .join("\n");
+    }
+
+    function loadPhotos() {
+      document.querySelectorAll("[data-photo-preview]").forEach(slot => {
+        const key = slot.dataset.photoPreview;
+        const saved = localStorage.getItem(PHOTO_PREFIX + key);
+        if (saved) {
+          slot.innerHTML = `<img src="${saved}" alt="Photo of Henrik and Beli" />`;
+        }
+      });
+    }
+
+    function setupPhotoInputs() {
+      document.querySelectorAll("[data-photo-input]").forEach(input => {
+        input.addEventListener("change", () => {
+          const file = input.files && input.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = () => {
+            const key = input.dataset.photoInput;
+            localStorage.setItem(PHOTO_PREFIX + key, reader.result);
+            loadPhotos();
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+    }
+
+    document.getElementById("resetScores").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      renderAllRankers();
+      updateResults();
+    });
+
+    window.addEventListener("load", () => {
+      renderAllRankers();
+      updateResults();
+      setupPhotoInputs();
+      loadPhotos();
+
+      const peek = document.getElementById("henrikPeek");
+      if (!peek) return;
+
+      setTimeout(() => {
+        peek.classList.add("show");
+      }, 2200);
+
+      setTimeout(() => {
+        peek.classList.remove("show");
+      }, 6200);
+    });
+  </script>
+</body>
+</html>
