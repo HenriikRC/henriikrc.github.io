@@ -1,0 +1,3769 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Håndboldliga Tips 2026/27</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#12161d;
+  --surface:#1b212b;
+  --surface-2:#232a36;
+  --surface-3:#2a3140;
+  --border:#2f3746;
+  --text:#eef1f5;
+  --muted:#8993a4;
+  --henrik:#2dd4bf;
+  --henrik-dim:#134e4a;
+  --steen:#ffb703;
+  --steen-dim:#5c4308;
+  --success:#4ade80;
+  --danger:#f87171;
+  --court-line:rgba(255,255,255,0.06);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:
+    radial-gradient(circle at 15% -10%, rgba(45,212,191,0.08), transparent 45%),
+    radial-gradient(circle at 90% 0%, rgba(255,183,3,0.08), transparent 40%),
+    var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  min-height:100vh;
+}
+
+h1,h2,h3,.display{
+  font-family:'Oswald',system-ui,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:0.03em;
+  font-weight:600;
+  margin:0;
+}
+
+.mono{
+  font-family:'Roboto Mono',monospace;
+}
+
+.wrap{
+  max-width:1000px;
+  margin:0 auto;
+  padding:0 16px 64px;
+}
+
+
+
+header.top{
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+  padding:20px 0 0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1000px;
+  margin:0 auto;
+  padding:0 16px;
+}
+
+.brand h1{
+  font-size:20px;
+  letter-spacing:0.06em;
+}
+
+.brand h1 span{
+  color:var(--steen);
+}
+
+.sync-pill{
+  font-size:11px;
+  color:var(--muted);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:4px 10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.sync-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--muted);
+}
+
+.sync-pill.on .sync-dot{
+  background:var(--success);
+}
+
+.sync-pill.off .sync-dot{
+  background:var(--danger);
+}
+
+.scoreboard{
+  max-width:1000px;
+  margin:18px auto 0;
+  padding:0 16px;
+}
+
+.scoreboard-panel{
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px 22px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:14px;
+  position:relative;
+  overflow:hidden;
+}
+
+.scoreboard-panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:repeating-linear-gradient(
+    90deg,
+    var(--court-line) 0 1px,
+    transparent 1px 46px
+  );
+  pointer-events:none;
+}
+
+.sb-player{
+  text-align:center;
+}
+
+.sb-player .name{
+  font-size:13px;
+  color:var(--muted);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+.sb-player .pts{
+  font-family:'Roboto Mono',monospace;
+  font-weight:700;
+  font-size:42px;
+  line-height:1;
+  margin-top:4px;
+}
+
+.sb-player.henrik .pts{
+  color:var(--henrik);
+  text-shadow:0 0 18px rgba(45,212,191,0.35);
+}
+
+.sb-player.steen .pts{
+  color:var(--steen);
+  text-shadow:0 0 18px rgba(255,183,3,0.35);
+}
+
+.sb-vs{
+  font-family:'Oswald',sans-serif;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:0.15em;
+}
+
+
+nav.tabs{
+  max-width:1000px;
+  margin:18px auto 0;
+  padding:0 16px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+nav.tabs button{
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--muted);
+  padding:9px 14px;
+  border-radius:9px;
+  font-family:'Oswald',sans-serif;
+  font-size:12.5px;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .15s;
+}
+
+nav.tabs button:hover{
+  color:var(--text);
+  border-color:var(--surface-3);
+}
+
+nav.tabs button.active{
+  background:var(--surface-3);
+  color:var(--text);
+  border-color:var(--steen);
+}
+
+main{
+  max-width:1000px;
+  margin:22px auto 0;
+  padding:0 16px;
+}
+
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px 18px;
+  margin-bottom:14px;
+}
+
+.card h2{
+  font-size:16px;
+  color:var(--text);
+  margin-bottom:2px;
+}
+
+.subtle{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.row.between{
+  justify-content:space-between;
+}
+
+select,
+input[type=text],
+input[type=number],
+input[type=datetime-local]{
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:8px 10px;
+  border-radius:7px;
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+}
+
+select:focus,
+input:focus{
+  outline:2px solid var(--steen);
+  outline-offset:1px;
+}
+
+input[type=number]{
+  width:64px;
+  font-family:'Roboto Mono',monospace;
+  text-align:center;
+}
+
+button.btn{
+  background:var(--surface-3);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:8px 14px;
+  border-radius:7px;
+  font-family:'Oswald',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  font-size:12.5px;
+  cursor:pointer;
+}
+
+button.btn:hover{
+  border-color:var(--steen);
+}
+
+button.btn.primary{
+  background:var(--steen);
+  color:#1a1400;
+  border-color:var(--steen);
+  font-weight:700;
+}
+
+button.btn.ghost{
+  background:transparent;
+}
+
+button.btn.danger{
+  color:var(--danger);
+  border-color:var(--danger);
+  background:transparent;
+}
+
+button.btn:disabled{
+  opacity:0.4;
+  cursor:not-allowed;
+}
+
+button.btn.small{
+  padding:5px 10px;
+  font-size:11px;
+}
+
+.player-switch{
+  display:flex;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.player-switch button{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--muted);
+  font-family:'Oswald',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.player-switch button.active.henrik{
+  border-color:var(--henrik);
+  color:var(--henrik);
+  background:rgba(45,212,191,0.08);
+}
+
+.player-switch button.active.steen{
+  border-color:var(--steen);
+  color:var(--steen);
+  background:rgba(255,183,3,0.08);
+}
+
+.round-select{
+  margin-bottom:16px;
+}
+
+.match-card{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:10px;
+  background:var(--surface-2);
+}
+
+.match-card.locked{
+  opacity:0.9;
+}
+
+.match-teams{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.match-teams .team{
+  font-family:'Oswald',sans-serif;
+  font-size:14.5px;
+}
+
+.match-teams .team.away{
+  text-align:right;
+}
+
+.score-inputs{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.score-inputs .dash{
+  color:var(--muted);
+  font-family:'Roboto Mono',monospace;
+}
+
+.scorer-inputs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.scorer-inputs .field label{
+  display:block;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:4px;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+}
+
+.scorer-inputs input{
+  width:100%;
+}
+
+.match-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px dashed var(--border);
+}
+
+.badge{
+  font-size:11px;
+  padding:3px 9px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--muted);
+}
+
+.badge.locked{
+  color:var(--danger);
+  border-color:var(--danger);
+}
+
+.badge.points{
+  color:#1a1400;
+  background:var(--steen);
+  border-color:var(--steen);
+  font-weight:700;
+}
+
+.badge.points.zero{
+  background:transparent;
+  color:var(--muted);
+}
+
+.result-card{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:10px;
+  background:var(--surface-2);
+}
+
+.topscorer-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:10px;
+}
+
+.topscorer-grid h4{
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  margin:0 0 6px;
+}
+
+.ts-row{
+  display:flex;
+  gap:6px;
+  margin-bottom:6px;
+}
+
+.ts-row input[type=text]{
+  flex:1;
+  min-width:0;
+}
+
+.ts-row input[type=number]{
+  width:52px;
+}
+
+table.stand{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:6px;
+}
+
+table.stand th,
+table.stand td{
+  padding:8px 10px;
+  text-align:left;
+  border-bottom:1px solid var(--border);
+  font-size:13.5px;
+}
+
+table.stand th{
+  color:var(--muted);
+  font-weight:600;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:0.04em;
+}
+
+table.stand td.num{
+  font-family:'Roboto Mono',monospace;
+  text-align:right;
+}
+
+.round-block{
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-bottom:10px;
+  background:var(--surface-2);
+}
+
+.round-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 14px;
+  cursor:pointer;
+}
+
+.round-header h3{
+  font-size:14.5px;
+}
+
+.round-body{
+  padding:0 14px 14px;
+  display:none;
+}
+
+.round-body.open{
+  display:block;
+}
+
+.mini-match{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:7px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13.5px;
+}
+
+.mini-match:last-child{
+  border-bottom:none;
+}
+
+.add-match-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+
+.teams-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+
+.team-edit-row{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:7px;
+  padding:6px 8px;
+}
+
+.team-edit-row input{
+  flex:1;
+  min-width:0;
+}
+
+.settings-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:10px;
+}
+
+.settings-field label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+
+.settings-field input{
+  width:80px;
+}
+
+.empty{
+  color:var(--muted);
+  font-size:13.5px;
+  padding:18px;
+  text-align:center;
+  border:1px dashed var(--border);
+  border-radius:10px;
+}
+
+.footer-note{
+  color:var(--muted);
+  font-size:12px;
+  text-align:center;
+  margin-top:30px;
+  line-height:1.6;
+}
+
+.footer-note a{
+  color:var(--henrik);
+}
+
+.bars{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:14px;
+}
+
+.bar-row{
+  display:grid;
+  grid-template-columns:80px 1fr 40px;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+}
+
+.bar-track{
+  background:var(--surface-2);
+  border-radius:6px;
+  overflow:hidden;
+  height:10px;
+  position:relative;
+  border:1px solid var(--border);
+}
+
+.bar-fill{
+  height:100%;
+  border-radius:6px;
+}
+
+.toast{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--surface-3);
+  border:1px solid var(--steen);
+  color:var(--text);
+  padding:9px 18px;
+  border-radius:8px;
+  font-size:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s,transform .25s;
+  z-index:50;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(-6px);
+}
+
+@media(max-width:560px){
+  .scoreboard-panel{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .sb-vs{
+    order:3;
+  }
+
+  .topscorer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .settings-grid{
+    grid-template-columns:1fr;
+  }
+
+  .teams-list{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDmv3DgIScVWP3tq2SSapS_R9w49gviCFI",
+    authDomain: "handball-26-27.firebaseapp.com",
+    projectId: "handball-26-27",
+    storageBucket: "handball-26-27.firebasestorage.app",
+    messagingSenderId: "660609138006",
+    appId: "1:660609138006:web:1b5871be1a46944c60aaf7",
+    measurementId: "G-BPJX8TMSMT"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+<body>
+
+<header class="top">
+
+  <div class="brand">
+    <h1>Håndbold<span>Tips</span> 26/27</h1>
+
+    <div class="sync-pill off" id="syncPill">
+      <span class="sync-dot"></span>
+      <span id="syncLabel">Lokal lagring</span>
+    </div>
+  </div>
+
+  <div class="scoreboard">
+    <div class="scoreboard-panel">
+
+      <div class="sb-player henrik">
+        <div class="name">Henrik</div>
+        <div class="pts mono" id="sbHenrik">0</div>
+      </div>
+
+      <div class="sb-vs">VS</div>
+
+      <div class="sb-player steen">
+        <div class="name">Steen</div>
+        <div class="pts mono" id="sbSteen">0</div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="predictions" class="active">Forudsigelser</button>
+    <button data-tab="rounds">Runder &amp; Kampe</button>
+    <button data-tab="results">Resultater</button>
+    <button data-tab="standings">Stilling</button>
+    <button data-tab="settings">Indstillinger</button>
+  </nav>
+
+</header>
+
+<main id="app"></main>
+
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+
+<script>
+
+
+const STORAGE_KEY = 'hbpredictor_v1';
+
+const DEFAULT_TEAMS = [
+  "Aalborg Håndbold",
+  "GOG",
+  "Skjern Håndbold",
+  "Skanderborg Aarhus",
+  "TMS Ringsted",
+  "Nordsjælland Håndbold",
+  "Fredericia HK",
+  "Ribe-Esbjerg HH",
+  "Mors-Thy Håndbold",
+  "KIF Kolding",
+  "Skive fH",
+  "Sønderjyske Herrehåndbold",
+  "TTH Holstebro",
+  "Bjerringbro-Silkeborg"
+];
+
+
+
+function uid(prefix){
+  return prefix + '_' +
+    Date.now().toString(36) +
+    Math.random().toString(36).slice(2,7);
+}
+
+function defaultData(){
+  return {
+    teams: DEFAULT_TEAMS.map(name => ({
+      id: uid('t'),
+      name
+    })),
+
+    rounds: [],
+
+    predictions: {
+      henrik: {},
+      steen: {}
+    },
+
+    settings: {
+      winner: 2,
+      exact: 1,
+      bonus: 3,
+      topscorer: 1
+    },
+
+    updatedAt: Date.now()
+  };
+}
+
+let data = loadLocal() || defaultData();
+
+let activeTab = 'predictions';
+let activePlayer = 'henrik';
+
+let openRounds = new Set();
+
+let predRoundId = null;
+let resultRoundId = null;
+
+
+
+function loadLocal(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    if(!raw){
+      return null;
+    }
+
+    return JSON.parse(raw);
+
+  }catch(e){
+    console.error('Could not load local data:', e);
+    return null;
+  }
+}
+
+function saveLocal(){
+  data.updatedAt = Date.now();
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+}
+
+
+
+let fbEnabled = false;
+let fbDoc = null;
+let fbSaveTimer = null;
+let fbApplyingRemote = false;
+
+
+async function initFirebase(){
+
+  if(
+    !window.FIREBASE_CONFIG ||
+    !window.FIREBASE_CONFIG.apiKey
+  ){
+    setSyncStatus(false, 'Lokal lagring');
+    return;
+  }
+
+  try{
+
+    await loadScript(
+      'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js'
+    );
+
+    await loadScript(
+      'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js'
+    );
+
+    await loadScript(
+      'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js'
+    );
+
+
+    if(!firebase.apps.length){
+      firebase.initializeApp(
+        window.FIREBASE_CONFIG
+      );
+    }
+
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    setSyncStatus(false, 'Logger ind...');
+
+    await auth.signInAnonymously();
+
+    fbDoc = db
+      .collection('handball-predictor')
+      .doc('shared');
+
+
+    fbDoc.onSnapshot(
+
+      snap => {
+
+        if(!snap.exists){
+
+          fbDoc
+            .set(data)
+            .then(() => {
+              setSyncStatus(true, 'Synkroniseret');
+            })
+            .catch(error => {
+              console.error(
+                'Initial Firestore write failed:',
+                error
+              );
+
+              setSyncStatus(false, 'Sync-fejl');
+            });
+
+          return;
+        }
+
+
+        const remote = snap.data();
+
+
+        if(
+          remote &&
+          remote.updatedAt &&
+          remote.updatedAt !== data.updatedAt
+        ){
+
+          fbApplyingRemote = true;
+
+          data = remote;
+
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+          );
+
+          render();
+
+          fbApplyingRemote = false;
+        }
+
+
+        setSyncStatus(true, 'Synkroniseret');
+
+      },
+
+      error => {
+
+        console.error(
+          'Firestore snapshot error:',
+          error
+        );
+
+        setSyncStatus(false, 'Sync-fejl');
+      }
+    );
+
+
+    fbEnabled = true;
+
+    setSyncStatus(true, 'Synkroniseret');
+
+
+  }catch(error){
+
+    console.error(
+      'Firebase initialization error:',
+      error
+    );
+
+    setSyncStatus(
+      false,
+      'Sync ikke tilgængelig'
+    );
+  }
+}
+
+
+
+function loadScript(src){
+
+  return new Promise((resolve,reject) => {
+
+    const script = document.createElement('script');
+
+    script.src = src;
+
+    script.onload = resolve;
+
+    script.onerror = reject;
+
+    document.head.appendChild(script);
+  });
+}
+
+
+function setSyncStatus(on,label){
+
+  const pill =
+    document.getElementById('syncPill');
+
+  pill.classList.toggle('on',on);
+
+  pill.classList.toggle('off',!on);
+
+  document.getElementById(
+    'syncLabel'
+  ).textContent = label;
+}
+
+
+function persist(){
+
+  saveLocal();
+
+
+
+  if(
+    fbEnabled &&
+    fbDoc &&
+    !fbApplyingRemote
+  ){
+
+    clearTimeout(fbSaveTimer);
+
+    fbSaveTimer = setTimeout(() => {
+
+      fbDoc
+        .set(data)
+        .then(() => {
+          setSyncStatus(true, 'Synkroniseret');
+        })
+        .catch(error => {
+
+          console.error(
+            'Firestore write failed:',
+            error
+          );
+
+          setSyncStatus(false,'Sync-fejl');
+        });
+
+    },400);
+  }
+}
+
+
+function teamName(id){
+
+  const team =
+    data.teams.find(
+      t => t.id === id
+    );
+
+  return team
+    ? team.name
+    : '?';
+}
+
+
+function getRound(id){
+
+  return data.rounds.find(
+    r => r.id === id
+  );
+}
+
+
+function getMatch(roundId,matchId){
+
+  const round = getRound(roundId);
+
+  return round
+    ? round.matches.find(
+        m => m.id === matchId
+      )
+    : null;
+}
+
+
+function allMatches(){
+
+  return data.rounds.flatMap(
+    round =>
+      round.matches.map(
+        match => ({
+          ...match,
+          roundId:round.id,
+          roundName:round.name
+        })
+      )
+  );
+}
+
+
+function toast(msg){
+
+  const el =
+    document.getElementById('toast');
+
+  el.textContent = msg;
+
+  el.classList.add('show');
+
+  clearTimeout(toast._t);
+
+  toast._t = setTimeout(
+    () => el.classList.remove('show'),
+    1800
+  );
+}
+
+
+
+function computeMatchPoints(
+  pred,
+  result,
+  settings
+){
+
+  if(
+    !pred ||
+    !result ||
+    result.homeScore === null ||
+    result.homeScore === undefined
+  ){
+
+    return {
+      total:0,
+      parts:[]
+    };
+  }
+
+
+  const parts = [];
+
+  let total = 0;
+
+  const predWinner =
+    pred.homeScore > pred.awayScore
+      ? 'home'
+      : pred.homeScore < pred.awayScore
+        ? 'away'
+        : 'draw';
+
+
+  const actWinner =
+    result.homeScore > result.awayScore
+      ? 'home'
+      : result.homeScore < result.awayScore
+        ? 'away'
+        : 'draw';
+
+
+  if(predWinner === actWinner){
+
+    total += settings.winner;
+
+    parts.push(
+      'Rigtig vinder +' +
+      settings.winner
+    );
+  }
+
+
+
+  let exactCount = 0;
+
+
+  if(
+    pred.homeScore ===
+    result.homeScore
+  ){
+
+    total += settings.exact;
+
+    exactCount++;
+
+    parts.push(
+      'Præcist hjemme-antal +' +
+      settings.exact
+    );
+  }
+
+
+  if(
+    pred.awayScore ===
+    result.awayScore
+  ){
+
+    total += settings.exact;
+
+    exactCount++;
+
+    parts.push(
+      'Præcist ude-antal +' +
+      settings.exact
+    );
+  }
+
+
+  if(exactCount === 2){
+
+    total += settings.bonus;
+
+    parts.push(
+      'Fuld pletskud-bonus +' +
+      settings.bonus
+    );
+  }
+
+
+  const homeScorers =
+    (result.homeScorers || [])
+      .map(
+        s =>
+          (s.name || '')
+            .trim()
+            .toLowerCase()
+      )
+      .filter(Boolean);
+
+
+  const awayScorers =
+    (result.awayScorers || [])
+      .map(
+        s =>
+          (s.name || '')
+            .trim()
+            .toLowerCase()
+      )
+      .filter(Boolean);
+
+
+  if(
+    pred.homeScorer &&
+    homeScorers.includes(
+      pred.homeScorer
+        .trim()
+        .toLowerCase()
+    )
+  ){
+
+    total += settings.topscorer;
+
+    parts.push(
+      'Topscorer hjemme +' +
+      settings.topscorer
+    );
+  }
+
+
+  if(
+    pred.awayScorer &&
+    awayScorers.includes(
+      pred.awayScorer
+        .trim()
+        .toLowerCase()
+    )
+  ){
+
+    total += settings.topscorer;
+
+    parts.push(
+      'Topscorer ude +' +
+      settings.topscorer
+    );
+  }
+
+
+  return {
+    total,
+    parts
+  };
+}
+
+
+function playerTotal(player){
+
+  let total = 0;
+
+
+  for(const m of allMatches()){
+
+    if(!m.result){
+      continue;
+    }
+
+
+    const pred =
+      data.predictions[player][m.id];
+
+
+    total +=
+      computeMatchPoints(
+        pred,
+        m.result,
+        data.settings
+      ).total;
+  }
+
+
+  return total;
+}
+
+
+function playerTotalByRound(
+  player,
+  roundId
+){
+
+  const round =
+    getRound(roundId);
+
+  if(!round){
+    return 0;
+  }
+
+
+  let total = 0;
+
+
+  for(const m of round.matches){
+
+    if(!m.result){
+      continue;
+    }
+
+
+    const pred =
+      data.predictions[player][m.id];
+
+
+    total +=
+      computeMatchPoints(
+        pred,
+        m.result,
+        data.settings
+      ).total;
+  }
+
+
+  return total;
+}
+
+
+function render(){
+
+  document.getElementById(
+    'sbHenrik'
+  ).textContent =
+    playerTotal('henrik');
+
+
+  document.getElementById(
+    'sbSteen'
+  ).textContent =
+    playerTotal('steen');
+
+
+  const app =
+    document.getElementById('app');
+
+
+  if(activeTab === 'predictions'){
+    app.innerHTML =
+      renderPredictions();
+
+  }else if(activeTab === 'rounds'){
+    app.innerHTML =
+      renderRounds();
+
+  }else if(activeTab === 'results'){
+    app.innerHTML =
+      renderResults();
+
+  }else if(activeTab === 'standings'){
+    app.innerHTML =
+      renderStandings();
+
+  }else if(activeTab === 'settings'){
+    app.innerHTML =
+      renderSettings();
+  }
+
+
+  attachHandlers();
+}
+
+
+
+function renderPredictions(){
+
+  if(
+    !predRoundId &&
+    data.rounds.length
+  ){
+
+    predRoundId =
+      data.rounds[0].id;
+  }
+
+
+  const roundOptions =
+    data.rounds
+      .map(
+        r =>
+          `<option value="${r.id}" ${
+            r.id === predRoundId
+              ? 'selected'
+              : ''
+          }>
+            ${escapeHtml(r.name)}
+          </option>`
+      )
+      .join('');
+
+
+  if(!data.rounds.length){
+
+    return `
+      <div class="player-switch">
+        ${playerBtn('henrik')}
+        ${playerBtn('steen')}
+      </div>
+
+      <div class="empty">
+        Ingen runder oprettet endnu.
+        Gå til <strong>Runder &amp; Kampe</strong>
+        for at oprette den første runde og tilføje kampe.
+      </div>
+    `;
+  }
+
+
+  const round =
+    getRound(predRoundId);
+
+
+  const matchesHtml =
+    round.matches.length
+      ? round.matches
+          .map(m =>
+            renderPredictionMatch(m)
+          )
+          .join('')
+
+      : `
+        <div class="empty">
+          Denne runde har ingen kampe endnu.
+        </div>
+      `;
+
+
+  return `
+    <div class="player-switch">
+      ${playerBtn('henrik')}
+      ${playerBtn('steen')}
+    </div>
+
+    <div class="card round-select">
+      <div class="row between">
+
+        <div>
+          <h2>Vælg runde</h2>
+
+          <div class="subtle">
+            Forudsigelser for
+            <strong style="color:var(--${activePlayer})">
+              ${
+                activePlayer === 'henrik'
+                  ? 'Henrik'
+                  : 'Steen'
+              }
+            </strong>
+          </div>
+        </div>
+
+        <select id="predRoundSelect">
+          ${roundOptions}
+        </select>
+
+      </div>
+    </div>
+
+    ${matchesHtml}
+  `;
+}
+
+
+function playerBtn(p){
+
+  const label =
+    p === 'henrik'
+      ? 'Henrik'
+      : 'Steen';
+
+
+  return `
+    <button
+      data-player="${p}"
+      class="${
+        activePlayer === p
+          ? 'active ' + p
+          : ''
+      }"
+    >
+      ${label}
+    </button>
+  `;
+}
+
+
+function renderPredictionMatch(m){
+
+  const pred =
+    data.predictions[activePlayer][m.id] ||
+    {};
+
+
+  const locked =
+    !!m.result;
+
+
+  const pts =
+    locked
+      ? computeMatchPoints(
+          pred,
+          m.result,
+          data.settings
+        )
+      : null;
+
+
+  return `
+    <div class="match-card ${
+      locked ? 'locked' : ''
+    }">
+
+      <div class="match-teams">
+
+        <div class="team">
+          ${escapeHtml(
+            teamName(m.homeTeamId)
+          )}
+        </div>
+
+        <div class="score-inputs">
+
+          <input
+            type="number"
+            min="0"
+            data-mid="${m.id}"
+            data-field="homeScore"
+            value="${
+              pred.homeScore ?? ''
+            }"
+            ${locked ? 'disabled' : ''}
+          >
+
+          <span class="dash">–</span>
+
+          <input
+            type="number"
+            min="0"
+            data-mid="${m.id}"
+            data-field="awayScore"
+            value="${
+              pred.awayScore ?? ''
+            }"
+            ${locked ? 'disabled' : ''}
+          >
+
+        </div>
+
+        <div class="team away">
+          ${escapeHtml(
+            teamName(m.awayTeamId)
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="scorer-inputs">
+
+        <div class="field">
+
+          <label>
+            Topscorer,
+            ${escapeHtml(
+              teamName(m.homeTeamId)
+            )}
+          </label>
+
+          <input
+            type="text"
+            list="scorerNames"
+            placeholder="Navn"
+            data-mid="${m.id}"
+            data-field="homeScorer"
+            value="${escapeHtml(
+              pred.homeScorer || ''
+            )}"
+            ${locked ? 'disabled' : ''}
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Topscorer,
+            ${escapeHtml(
+              teamName(m.awayTeamId)
+            )}
+          </label>
+
+          <input
+            type="text"
+            list="scorerNames"
+            placeholder="Navn"
+            data-mid="${m.id}"
+            data-field="awayScorer"
+            value="${escapeHtml(
+              pred.awayScorer || ''
+            )}"
+            ${locked ? 'disabled' : ''}
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="match-footer">
+
+        ${
+          locked
+
+            ? `
+              <span class="badge locked">
+                Låst – resultat:
+                ${m.result.homeScore}–${m.result.awayScore}
+              </span>
+            `
+
+            : `
+              <span class="badge">
+                Åben for forudsigelse
+              </span>
+            `
+        }
+
+
+        ${
+          locked
+
+            ? `
+              <span class="badge points ${
+                pts.total === 0
+                  ? 'zero'
+                  : ''
+              }">
+                ${pts.total} point
+              </span>
+            `
+
+            : ''
+        }
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+
+function renderRounds(){
+
+  const teamOptions =
+    data.teams
+      .map(
+        t =>
+          `<option value="${t.id}">
+            ${escapeHtml(t.name)}
+          </option>`
+      )
+      .join('');
+
+
+  const roundsHtml =
+    data.rounds
+      .map(
+        r =>
+          renderRoundBlock(
+            r,
+            teamOptions
+          )
+      )
+      .join('') ||
+
+    `
+      <div class="empty">
+        Ingen runder endnu — opret den første herunder.
+      </div>
+    `;
+
+
+  return `
+    <div class="card">
+
+      <h2>Opret ny runde</h2>
+
+      <div class="subtle">
+        F.eks. "Runde 1" … "Runde 26",
+        eller "Slutspil – gruppe A, kamp 1".
+      </div>
+
+      <div
+        class="row"
+        style="margin-top:10px;"
+      >
+
+        <input
+          type="text"
+          id="newRoundName"
+          placeholder="Navn på runde"
+          value="${nextRoundName()}"
+        >
+
+        <button
+          class="btn primary"
+          id="addRoundBtn"
+        >
+          Tilføj runde
+        </button>
+
+      </div>
+
+    </div>
+
+    ${roundsHtml}
+  `;
+}
+
+
+function nextRoundName(){
+
+  const n =
+    data.rounds.filter(
+      r => /^Runde \d+$/.test(r.name)
+    ).length;
+
+
+  return 'Runde ' + (n + 1);
+}
+
+
+function renderRoundBlock(
+  r,
+  teamOptions
+){
+
+  const open =
+    openRounds.has(r.id);
+
+
+  const matchesHtml =
+    r.matches.length
+
+      ? r.matches.map(
+          m => `
+            <div class="mini-match">
+
+              <span>
+
+                ${escapeHtml(
+                  teamName(m.homeTeamId)
+                )}
+
+                <span class="subtle mono">
+                  vs
+                </span>
+
+                ${escapeHtml(
+                  teamName(m.awayTeamId)
+                )}
+
+                ${
+                  m.result
+
+                    ? `
+                      <span
+                        class="badge locked"
+                        style="margin-left:8px;"
+                      >
+                        ${m.result.homeScore}–${m.result.awayScore}
+                      </span>
+                    `
+
+                    : ''
+                }
+
+              </span>
+
+              <button
+                class="btn small danger"
+                data-del-match="${r.id}|${m.id}"
+              >
+                Fjern
+              </button>
+
+            </div>
+          `
+        ).join('')
+
+      : `
+        <div
+          class="subtle"
+          style="padding:8px 0;"
+        >
+          Ingen kampe i denne runde endnu.
+        </div>
+      `;
+
+
+  return `
+    <div class="round-block">
+
+      <div
+        class="round-header"
+        data-toggle-round="${r.id}"
+      >
+
+        <h3>
+          ${escapeHtml(r.name)}
+
+          <span class="subtle">
+            (${r.matches.length} kampe)
+          </span>
+        </h3>
+
+        <div class="row">
+
+          <button
+            class="btn small danger"
+            data-del-round="${r.id}"
+          >
+            Slet runde
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="round-body ${
+        open ? 'open' : ''
+      }">
+
+        ${matchesHtml}
+
+
+        <div class="add-match-row">
+
+          <select
+            data-home-select="${r.id}"
+          >
+            <option value="">
+              Hjemmehold
+            </option>
+
+            ${teamOptions}
+          </select>
+
+
+          <span class="subtle">
+            vs
+          </span>
+
+
+          <select
+            data-away-select="${r.id}"
+          >
+            <option value="">
+              Udehold
+            </option>
+
+            ${teamOptions}
+          </select>
+
+
+          <button
+            class="btn"
+            data-add-match="${r.id}"
+          >
+            Tilføj kamp
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+
+function renderResults(){
+
+  if(
+    !resultRoundId &&
+    data.rounds.length
+  ){
+
+    resultRoundId =
+      data.rounds[0].id;
+  }
+
+
+  if(!data.rounds.length){
+
+    return `
+      <div class="empty">
+        Opret runder og kampe under
+        <strong>Runder &amp; Kampe</strong>
+        først.
+      </div>
+    `;
+  }
+
+
+  const roundOptions =
+    data.rounds
+      .map(
+        r =>
+          `<option value="${r.id}" ${
+            r.id === resultRoundId
+              ? 'selected'
+              : ''
+          }>
+            ${escapeHtml(r.name)}
+          </option>`
+      )
+      .join('');
+
+
+  const round =
+    getRound(resultRoundId);
+
+
+  const matchesHtml =
+    round.matches.length
+
+      ? round.matches
+          .map(
+            m =>
+              renderResultMatch(
+                round,
+                m
+              )
+          )
+          .join('')
+
+      : `
+        <div class="empty">
+          Denne runde har ingen kampe endnu.
+        </div>
+      `;
+
+
+  return `
+    <div class="card">
+
+      <div class="row between">
+
+        <h2>
+          Indtast resultater
+        </h2>
+
+        <select id="resultRoundSelect">
+          ${roundOptions}
+        </select>
+
+      </div>
+
+    </div>
+
+    ${matchesHtml}
+  `;
+}
+
+
+function renderResultMatch(
+  round,
+  m
+){
+
+  const res =
+    m.result ||
+
+    {
+      homeScore:'',
+      awayScore:'',
+      homeScorers:[
+        {name:'',goals:''},
+        {name:'',goals:''}
+      ],
+      awayScorers:[
+        {name:'',goals:''},
+        {name:'',goals:''}
+      ]
+    };
+
+
+  const hs =
+    res.homeScorers &&
+    res.homeScorers.length
+
+      ? res.homeScorers
+
+      : [
+          {name:'',goals:''},
+          {name:'',goals:''}
+        ];
+
+
+  const as =
+    res.awayScorers &&
+    res.awayScorers.length
+
+      ? res.awayScorers
+
+      : [
+          {name:'',goals:''},
+          {name:'',goals:''}
+        ];
+
+
+  return `
+    <div
+      class="result-card"
+      data-round="${round.id}"
+      data-match="${m.id}"
+    >
+
+      <div class="match-teams">
+
+        <div class="team">
+          ${escapeHtml(
+            teamName(m.homeTeamId)
+          )}
+        </div>
+
+
+        <div class="score-inputs">
+
+          <input
+            type="number"
+            min="0"
+            data-rfield="homeScore"
+            value="${res.homeScore ?? ''}"
+          >
+
+          <span class="dash">–</span>
+
+          <input
+            type="number"
+            min="0"
+            data-rfield="awayScore"
+            value="${res.awayScore ?? ''}"
+          >
+
+        </div>
+
+
+        <div class="team away">
+          ${escapeHtml(
+            teamName(m.awayTeamId)
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="topscorer-grid">
+
+        <div>
+
+          <h4>
+            Topscorere,
+            ${escapeHtml(
+              teamName(m.homeTeamId)
+            )}
+            (op til 2)
+          </h4>
+
+
+          ${[0,1].map(
+            i => `
+              <div class="ts-row">
+
+                <input
+                  type="text"
+                  data-scorer="home-${i}-name"
+                  placeholder="Navn"
+                  value="${escapeHtml(
+                    hs[i]?.name || ''
+                  )}"
+                  list="scorerNames"
+                >
+
+                <input
+                  type="number"
+                  min="0"
+                  data-scorer="home-${i}-goals"
+                  placeholder="Mål"
+                  value="${hs[i]?.goals ?? ''}"
+                >
+
+              </div>
+            `
+          ).join('')}
+
+        </div>
+
+
+        <div>
+
+          <h4>
+            Topscorere,
+            ${escapeHtml(
+              teamName(m.awayTeamId)
+            )}
+            (op til 2)
+          </h4>
+
+
+          ${[0,1].map(
+            i => `
+              <div class="ts-row">
+
+                <input
+                  type="text"
+                  data-scorer="away-${i}-name"
+                  placeholder="Navn"
+                  value="${escapeHtml(
+                    as[i]?.name || ''
+                  )}"
+                  list="scorerNames"
+                >
+
+                <input
+                  type="number"
+                  min="0"
+                  data-scorer="away-${i}-goals"
+                  placeholder="Mål"
+                  value="${as[i]?.goals ?? ''}"
+                >
+
+              </div>
+            `
+          ).join('')}
+
+        </div>
+
+      </div>
+
+
+      <div class="match-footer">
+
+        <span
+          class="badge ${
+            m.result ? '' : 'locked'
+          }"
+          style="${
+            m.result
+              ? ''
+              : 'color:var(--muted);border-color:var(--border);'
+          }"
+        >
+          ${
+            m.result
+              ? 'Resultat gemt'
+              : 'Ikke spillet / intet resultat endnu'
+          }
+        </span>
+
+
+        <div class="row">
+
+          ${
+            m.result
+
+              ? `
+                <button
+                  class="btn small danger"
+                  data-clear-result="${round.id}|${m.id}"
+                >
+                  Ryd resultat
+                </button>
+              `
+
+              : ''
+          }
+
+
+          <button
+            class="btn small primary"
+            data-save-result="${round.id}|${m.id}"
+          >
+            Gem resultat
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+
+function renderStandings(){
+
+  const h =
+    playerTotal('henrik');
+
+  const s =
+    playerTotal('steen');
+
+  const max =
+    Math.max(h,s,1);
+
+
+  const roundsWithResults =
+    data.rounds.filter(
+      r =>
+        r.matches.some(
+          m => m.result
+        )
+    );
+
+
+  const rowsHtml =
+    roundsWithResults
+      .map(
+        r => {
+
+          const hp =
+            playerTotalByRound(
+              'henrik',
+              r.id
+            );
+
+          const sp =
+            playerTotalByRound(
+              'steen',
+              r.id
+            );
+
+
+          return `
+            <tr>
+
+              <td>
+                ${escapeHtml(r.name)}
+              </td>
+
+              <td
+                class="num"
+                style="color:var(--henrik)"
+              >
+                ${hp}
+              </td>
+
+              <td
+                class="num"
+                style="color:var(--steen)"
+              >
+                ${sp}
+              </td>
+
+            </tr>
+          `;
+        }
+      )
+      .join('');
+
+
+  return `
+    <div class="card">
+
+      <h2>
+        Samlet stilling
+      </h2>
+
+
+      <table class="stand">
+
+        <tr>
+          <th>Spiller</th>
+          <th style="text-align:right">
+            Point
+          </th>
+        </tr>
+
+
+        <tr>
+
+          <td style="color:var(--henrik)">
+            Henrik
+          </td>
+
+          <td class="num">
+            ${h}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td style="color:var(--steen)">
+            Steen
+          </td>
+
+          <td class="num">
+            ${s}
+          </td>
+
+        </tr>
+
+      </table>
+
+
+      <div class="bars">
+
+        <div class="bar-row">
+
+          <span>
+            Henrik
+          </span>
+
+          <div class="bar-track">
+
+            <div
+              class="bar-fill"
+              style="
+                width:${h/max*100}%;
+                background:var(--henrik);
+              "
+            ></div>
+
+          </div>
+
+          <span class="mono">
+            ${h}
+          </span>
+
+        </div>
+
+
+        <div class="bar-row">
+
+          <span>
+            Steen
+          </span>
+
+          <div class="bar-track">
+
+            <div
+              class="bar-fill"
+              style="
+                width:${s/max*100}%;
+                background:var(--steen);
+              "
+            ></div>
+
+          </div>
+
+          <span class="mono">
+            ${s}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        Point pr. runde
+      </h2>
+
+
+      ${
+        roundsWithResults.length
+
+          ? `
+            <table class="stand">
+
+              <tr>
+
+                <th>
+                  Runde
+                </th>
+
+                <th style="text-align:right">
+                  Henrik
+                </th>
+
+                <th style="text-align:right">
+                  Steen
+                </th>
+
+              </tr>
+
+              ${rowsHtml}
+
+            </table>
+          `
+
+          : `
+            <div class="empty">
+              Ingen resultater indtastet endnu.
+            </div>
+          `
+      }
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        Pointsystem
+      </h2>
+
+      <div
+        class="subtle"
+        style="line-height:1.7;"
+      >
+
+        Rigtig vinder:
+        <strong class="mono">
+          ${data.settings.winner}
+        </strong>
+        point ·
+
+        Præcist antal mål pr. hold:
+        <strong class="mono">
+          ${data.settings.exact}
+        </strong>
+        point (hver) ·
+
+        Bonus for pletskud:
+        <strong class="mono">
+          ${data.settings.bonus}
+        </strong>
+        point ·
+
+        Korrekt topscorer pr. hold:
+        <strong class="mono">
+          ${data.settings.topscorer}
+        </strong>
+        point (hver)
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+
+function renderSettings(){
+
+  const teamsHtml =
+    data.teams
+      .map(
+        t => `
+          <div class="team-edit-row">
+
+            <input
+              type="text"
+              data-team-id="${t.id}"
+              value="${escapeHtml(t.name)}"
+            >
+
+            <button
+              class="btn small danger"
+              data-del-team="${t.id}"
+            >
+              ✕
+            </button>
+
+          </div>
+        `
+      )
+      .join('');
+
+
+  return `
+    <div class="card">
+
+      <h2>
+        Hold
+      </h2>
+
+      <div class="subtle">
+        Rediger holdnavne eller tilføj/fjern hold
+        (14 hold i Håndboldligaen som standard).
+      </div>
+
+
+      <div class="teams-list">
+        ${teamsHtml}
+      </div>
+
+
+      <div
+        class="row"
+        style="margin-top:10px;"
+      >
+
+        <input
+          type="text"
+          id="newTeamName"
+          placeholder="Nyt holdnavn"
+        >
+
+        <button
+          class="btn"
+          id="addTeamBtn"
+        >
+          Tilføj hold
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        Pointsysteem
+      </h2>
+
+
+      <div class="settings-grid">
+
+        <div class="settings-field">
+
+          <label>
+            Point for rigtig vinder
+          </label>
+
+          <input
+            type="number"
+            min="0"
+            id="setWinner"
+            value="${data.settings.winner}"
+          >
+
+        </div>
+
+
+        <div class="settings-field">
+
+          <label>
+            Point pr. præcist måltal (pr. hold)
+          </label>
+
+          <input
+            type="number"
+            min="0"
+            id="setExact"
+            value="${data.settings.exact}"
+          >
+
+        </div>
+
+
+        <div class="settings-field">
+
+          <label>
+            Bonus for fuldt pletskud
+          </label>
+
+          <input
+            type="number"
+            min="0"
+            id="setBonus"
+            value="${data.settings.bonus}"
+          >
+
+        </div>
+
+
+        <div class="settings-field">
+
+          <label>
+            Point for korrekt topscorer (pr. hold)
+          </label>
+
+          <input
+            type="number"
+            min="0"
+            id="setTopscorer"
+            value="${data.settings.topscorer}"
+          >
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn primary"
+        id="saveSettingsBtn"
+        style="margin-top:12px;"
+      >
+        Gem pointsystem
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        Data
+      </h2>
+
+      <div class="subtle">
+        Tag backup, gendan fra fil, eller nulstil alt.
+      </div>
+
+
+      <div
+        class="row"
+        style="margin-top:10px;"
+      >
+
+        <button
+          class="btn"
+          id="exportBtn"
+        >
+          Eksportér backup (.json)
+        </button>
+
+
+        <button
+          class="btn"
+          id="importBtn"
+        >
+          Importér backup
+        </button>
+
+
+        <input
+          type="file"
+          id="importFile"
+          accept="application/json"
+          style="display:none;"
+        >
+
+
+        <button
+          class="btn danger"
+          id="resetBtn"
+        >
+          Nulstil alt
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        Deling mellem enheder
+      </h2>
+
+      <div class="subtle">
+
+        ${
+          window.FIREBASE_CONFIG &&
+          window.FIREBASE_CONFIG.apiKey
+
+            ? `
+              Cloud-synkronisering er sat op.
+              Henrik og Steen kan se hinandens data
+              automatisk.
+            `
+
+            : `
+              Der er ikke sat cloud-synkronisering op endnu.
+              Data gemmes kun i denne browser.
+            `
+        }
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+
+function escapeHtml(str){
+
+  return String(str ?? '')
+    .replace(
+      /[&<>"']/g,
+      c =>
+        ({
+          '&':'&amp;',
+          '<':'&lt;',
+          '>':'&gt;',
+          '"':'&quot;',
+          "'":'&#39;'
+        }[c])
+    );
+}
+
+
+
+function collectScorerNames(){
+
+  const names =
+    new Set();
+
+
+  for(const r of data.rounds){
+
+    for(const m of r.matches){
+
+      if(!m.result){
+        continue;
+      }
+
+
+      (m.result.homeScorers || [])
+        .forEach(
+          s => {
+            if(s.name){
+              names.add(s.name);
+            }
+          }
+        );
+
+
+      (m.result.awayScorers || [])
+        .forEach(
+          s => {
+            if(s.name){
+              names.add(s.name);
+            }
+          }
+        );
+    }
+  }
+
+
+  const dl =
+    document.getElementById(
+      'scorerNames'
+    ) ||
+
+    (() => {
+
+      const d =
+        document.createElement(
+          'datalist'
+        );
+
+      d.id = 'scorerNames';
+
+      document.body.appendChild(d);
+
+      return d;
+
+    })();
+
+
+  dl.innerHTML =
+    [...names]
+      .map(
+        n =>
+          `<option value="${escapeHtml(n)}">`
+      )
+      .join('');
+}
+
+
+
+function attachHandlers(){
+
+  collectScorerNames();
+
+
+
+  if(activeTab === 'predictions'){
+
+    document
+      .querySelectorAll('[data-player]')
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            activePlayer =
+              btn.dataset.player;
+
+            render();
+          }
+        );
+      });
+
+
+    const sel =
+      document.getElementById(
+        'predRoundSelect'
+      );
+
+
+    if(sel){
+
+      sel.addEventListener(
+        'change',
+        () => {
+
+          predRoundId =
+            sel.value;
+
+          render();
+        }
+      );
+    }
+
+
+    document
+      .querySelectorAll('[data-mid]')
+      .forEach(inp => {
+
+        inp.addEventListener(
+          'change',
+          () => {
+
+            const mid =
+              inp.dataset.mid;
+
+            const field =
+              inp.dataset.field;
+
+
+            const p =
+              data.predictions[
+                activePlayer
+              ];
+
+
+            if(!p[mid]){
+              p[mid] = {};
+            }
+
+
+            let val =
+              inp.value;
+
+
+            if(
+              field === 'homeScore' ||
+              field === 'awayScore'
+            ){
+
+              val =
+                val === ''
+                  ? null
+                  : parseInt(
+                      val,
+                      10
+                    );
+            }
+
+
+            p[mid][field] =
+              val;
+
+
+            persist();
+
+            render();
+          }
+        );
+      });
+  }
+
+
+
+  if(activeTab === 'rounds'){
+
+    document
+      .querySelectorAll(
+        '[data-toggle-round]'
+      )
+      .forEach(el => {
+
+        el.addEventListener(
+          'click',
+          e => {
+
+            if(
+              e.target.closest('button')
+            ){
+              return;
+            }
+
+
+            const id =
+              el.dataset.toggleRound;
+
+
+            if(openRounds.has(id)){
+              openRounds.delete(id);
+            }else{
+              openRounds.add(id);
+            }
+
+
+            render();
+          }
+        );
+      });
+
+
+    const addRoundBtn =
+      document.getElementById(
+        'addRoundBtn'
+      );
+
+
+    if(addRoundBtn){
+
+      addRoundBtn.addEventListener(
+        'click',
+        () => {
+
+          const name =
+            document
+              .getElementById(
+                'newRoundName'
+              )
+              .value
+              .trim() ||
+            nextRoundName();
+
+
+          const r = {
+            id:uid('r'),
+            name,
+            matches:[]
+          };
+
+
+          data.rounds.push(r);
+
+          openRounds.add(r.id);
+
+          persist();
+
+          render();
+        }
+      );
+    }
+
+
+    document
+      .querySelectorAll(
+        '[data-del-round]'
+      )
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            if(
+              !confirm(
+                'Slet denne runde og alle dens kampe?'
+              )
+            ){
+              return;
+            }
+
+
+            data.rounds =
+              data.rounds.filter(
+                r =>
+                  r.id !==
+                  btn.dataset.delRound
+              );
+
+
+            persist();
+
+            render();
+          }
+        );
+      });
+
+
+    document
+      .querySelectorAll(
+        '[data-add-match]'
+      )
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            const rid =
+              btn.dataset.addMatch;
+
+
+            const homeSel =
+              document.querySelector(
+                `[data-home-select="${rid}"]`
+              );
+
+
+            const awaySel =
+              document.querySelector(
+                `[data-away-select="${rid}"]`
+              );
+
+
+            if(
+              !homeSel.value ||
+              !awaySel.value
+            ){
+
+              toast(
+                'Vælg begge hold'
+              );
+
+              return;
+            }
+
+
+            if(
+              homeSel.value ===
+              awaySel.value
+            ){
+
+              toast(
+                'Hold kan ikke møde sig selv'
+              );
+
+              return;
+            }
+
+
+            const r =
+              getRound(rid);
+
+
+            r.matches.push({
+
+              id:uid('m'),
+
+              homeTeamId:
+                homeSel.value,
+
+              awayTeamId:
+                awaySel.value,
+
+              result:null
+
+            });
+
+
+            persist();
+
+            render();
+          }
+        );
+      });
+
+
+    document
+      .querySelectorAll(
+        '[data-del-match]'
+      )
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            const [
+              rid,
+              mid
+            ] =
+              btn.dataset.delMatch
+                .split('|');
+
+
+            const r =
+              getRound(rid);
+
+
+            r.matches =
+              r.matches.filter(
+                m =>
+                  m.id !== mid
+              );
+
+
+            persist();
+
+            render();
+          }
+        );
+      });
+  }
+
+
+
+  if(activeTab === 'results'){
+
+    const sel =
+      document.getElementById(
+        'resultRoundSelect'
+      );
+
+
+    if(sel){
+
+      sel.addEventListener(
+        'change',
+        () => {
+
+          resultRoundId =
+            sel.value;
+
+          render();
+        }
+      );
+    }
+
+
+    document
+      .querySelectorAll(
+        '[data-save-result]'
+      )
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            const [
+              rid,
+              mid
+            ] =
+              btn.dataset.saveResult
+                .split('|');
+
+
+            const card =
+              btn.closest(
+                '.result-card'
+              );
+
+
+            const homeScore =
+              parseInt(
+                card.querySelector(
+                  '[data-rfield="homeScore"]'
+                ).value,
+                10
+              );
+
+
+            const awayScore =
+              parseInt(
+                card.querySelector(
+                  '[data-rfield="awayScore"]'
+                ).value,
+                10
+              );
+
+
+            if(
+              isNaN(homeScore) ||
+              isNaN(awayScore)
+            ){
+
+              toast(
+                'Udfyld begge måltal'
+              );
+
+              return;
+            }
+
+
+            const homeScorers =
+              [0,1]
+                .map(
+                  i => ({
+
+                    name:
+                      card
+                        .querySelector(
+                          `[data-scorer="home-${i}-name"]`
+                        )
+                        .value
+                        .trim(),
+
+                    goals:
+                      card
+                        .querySelector(
+                          `[data-scorer="home-${i}-goals"]`
+                        )
+                        .value
+
+                  })
+                )
+                .filter(
+                  s => s.name
+                );
+
+
+            const awayScorers =
+              [0,1]
+                .map(
+                  i => ({
+
+                    name:
+                      card
+                        .querySelector(
+                          `[data-scorer="away-${i}-name"]`
+                        )
+                        .value
+                        .trim(),
+
+                    goals:
+                      card
+                        .querySelector(
+                          `[data-scorer="away-${i}-goals"]`
+                        )
+                        .value
+
+                  })
+                )
+                .filter(
+                  s => s.name
+                );
+
+
+            const m =
+              getMatch(
+                rid,
+                mid
+              );
+
+
+            m.result = {
+
+              homeScore,
+
+              awayScore,
+
+              homeScorers,
+
+              awayScorers
+            };
+
+
+            persist();
+
+            render();
+
+            toast(
+              'Resultat gemt'
+            );
+          }
+        );
+      });
+
+
+    document
+      .querySelectorAll(
+        '[data-clear-result]'
+      )
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            const [
+              rid,
+              mid
+            ] =
+              btn.dataset.clearResult
+                .split('|');
+
+
+            const m =
+              getMatch(
+                rid,
+                mid
+              );
+
+
+            m.result = null;
+
+            persist();
+
+            render();
+          }
+        );
+      });
+  }
+
+
+
+  if(activeTab === 'settings'){
+
+    document
+      .querySelectorAll(
+        '[data-team-id]'
+      )
+      .forEach(inp => {
+
+        inp.addEventListener(
+          'change',
+          () => {
+
+            const t =
+              data.teams.find(
+                t =>
+                  t.id ===
+                  inp.dataset.teamId
+              );
+
+
+            if(t){
+
+              t.name =
+                inp.value.trim() ||
+                t.name;
+
+              persist();
+            }
+          }
+        );
+      });
+
+
+    document
+      .querySelectorAll(
+        '[data-del-team]'
+      )
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            if(
+              !confirm(
+                'Fjern dette hold? (Påvirker ikke allerede oprettede kampe)'
+              )
+            ){
+              return;
+            }
+
+
+            data.teams =
+              data.teams.filter(
+                t =>
+                  t.id !==
+                  btn.dataset.delTeam
+              );
+
+
+            persist();
+
+            render();
+          }
+        );
+      });
+
+
+    const addTeamBtn =
+      document.getElementById(
+        'addTeamBtn'
+      );
+
+
+    if(addTeamBtn){
+
+      addTeamBtn.addEventListener(
+        'click',
+        () => {
+
+          const inp =
+            document.getElementById(
+              'newTeamName'
+            );
+
+
+          if(!inp.value.trim()){
+            return;
+          }
+
+
+          data.teams.push({
+
+            id:uid('t'),
+
+            name:
+              inp.value.trim()
+
+          });
+
+
+          persist();
+
+          render();
+        }
+      );
+    }
+
+
+    const saveSettingsBtn =
+      document.getElementById(
+        'saveSettingsBtn'
+      );
+
+
+    if(saveSettingsBtn){
+
+      saveSettingsBtn.addEventListener(
+        'click',
+        () => {
+
+          data.settings = {
+
+            winner:
+              parseInt(
+                document.getElementById(
+                  'setWinner'
+                ).value,
+                10
+              ) || 0,
+
+            exact:
+              parseInt(
+                document.getElementById(
+                  'setExact'
+                ).value,
+                10
+              ) || 0,
+
+            bonus:
+              parseInt(
+                document.getElementById(
+                  'setBonus'
+                ).value,
+                10
+              ) || 0,
+
+            topscorer:
+              parseInt(
+                document.getElementById(
+                  'setTopscorer'
+                ).value,
+                10
+              ) || 0
+          };
+
+
+          persist();
+
+          render();
+
+          toast(
+            'Pointsystem gemt'
+          );
+        }
+      );
+    }
+
+
+
+    const exportBtn =
+      document.getElementById(
+        'exportBtn'
+      );
+
+
+    if(exportBtn){
+
+      exportBtn.addEventListener(
+        'click',
+        () => {
+
+          const blob =
+            new Blob(
+              [
+                JSON.stringify(
+                  data,
+                  null,
+                  2
+                )
+              ],
+              {
+                type:
+                  'application/json'
+              }
+            );
+
+
+          const url =
+            URL.createObjectURL(
+              blob
+            );
+
+
+          const a =
+            document.createElement(
+              'a'
+            );
+
+
+          a.href = url;
+
+          a.download =
+            'haandboldtips-backup-' +
+            new Date()
+              .toISOString()
+              .slice(0,10) +
+            '.json';
+
+
+          a.click();
+
+          URL.revokeObjectURL(url);
+        }
+      );
+    }
+
+
+    const importBtn =
+      document.getElementById(
+        'importBtn'
+      );
+
+
+    const importFile =
+      document.getElementById(
+        'importFile'
+      );
+
+
+    if(importBtn){
+
+      importBtn.addEventListener(
+        'click',
+        () =>
+          importFile.click()
+      );
+    }
+
+
+    if(importFile){
+
+      importFile.addEventListener(
+        'change',
+        () => {
+
+          const file =
+            importFile.files[0];
+
+
+          if(!file){
+            return;
+          }
+
+
+          const reader =
+            new FileReader();
+
+
+          reader.onload = () => {
+
+            try{
+
+              const parsed =
+                JSON.parse(
+                  reader.result
+                );
+
+
+              if(
+                !parsed.teams ||
+                !parsed.rounds ||
+                !parsed.predictions
+              ){
+
+                throw new Error(
+                  'bad format'
+                );
+              }
+
+
+              data = parsed;
+
+              persist();
+
+              render();
+
+              toast(
+                'Data importeret'
+              );
+
+            }catch(e){
+
+              alert(
+                'Kunne ikke læse filen. Sørg for det er en gyldig backup-fil.'
+              );
+            }
+          };
+
+
+          reader.readAsText(file);
+        }
+      );
+    }
+
+
+
+    const resetBtn =
+      document.getElementById(
+        'resetBtn'
+      );
+
+
+    if(resetBtn){
+
+      resetBtn.addEventListener(
+        'click',
+        () => {
+
+          if(
+            !confirm(
+              'Dette sletter ALT data (hold, runder, resultater, forudsigelser). Er du sikker?'
+            )
+          ){
+
+            return;
+          }
+
+
+          data =
+            defaultData();
+
+
+          persist();
+
+          render();
+        }
+      );
+    }
+  }
+}
+
+
+document
+  .getElementById('tabs')
+  .addEventListener(
+    'click',
+    e => {
+
+      const btn =
+        e.target.closest(
+          'button[data-tab]'
+        );
+
+
+      if(!btn){
+        return;
+      }
+
+
+      activeTab =
+        btn.dataset.tab;
+
+
+      document
+        .querySelectorAll(
+          '#tabs button'
+        )
+        .forEach(
+          b =>
+            b.classList.toggle(
+              'active',
+              b === btn
+            )
+        );
+
+
+      render();
+    }
+  );
+
+
+render();
+
+initFirebase();
+
+</script>
+
+</body>
+</html>
