@@ -1,783 +1,1168 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Håndboldliga Tips 2026/27</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --bg:#12161d;
-  --surface:#1b212b;
-  --surface-2:#232a36;
-  --surface-3:#2a3140;
-  --border:#2f3746;
-  --text:#eef1f5;
-  --muted:#8993a4;
-  --henrik:#2dd4bf;
-  --henrik-dim:#134e4a;
-  --steen:#ffb703;
-  --steen-dim:#5c4308;
-  --success:#4ade80;
-  --danger:#f87171;
-  --court-line:rgba(255,255,255,0.06);
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html,body{
-  margin:0;
-  padding:0;
-}
-
-body{
-  background:
-    radial-gradient(circle at 15% -10%, rgba(45,212,191,0.08), transparent 45%),
-    radial-gradient(circle at 90% 0%, rgba(255,183,3,0.08), transparent 40%),
-    var(--bg);
-  color:var(--text);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
-  min-height:100vh;
-}
-
-h1,h2,h3,.display{
-  font-family:'Oswald',system-ui,sans-serif;
-  text-transform:uppercase;
-  letter-spacing:0.03em;
-  font-weight:600;
-  margin:0;
-}
-
-.mono{
-  font-family:'Roboto Mono',monospace;
-}
-
-.wrap{
-  max-width:1000px;
-  margin:0 auto;
-  padding:0 16px 64px;
-}
-
-
-
-header.top{
-  border-bottom:1px solid var(--border);
-  background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
-  padding:20px 0 0;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  max-width:1000px;
-  margin:0 auto;
-  padding:0 16px;
-}
-
-.brand h1{
-  font-size:20px;
-  letter-spacing:0.06em;
-}
-
-.brand h1 span{
-  color:var(--steen);
-}
-
-.sync-pill{
-  font-size:11px;
-  color:var(--muted);
-  border:1px solid var(--border);
-  border-radius:999px;
-  padding:4px 10px;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.sync-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--muted);
-}
-
-.sync-pill.on .sync-dot{
-  background:var(--success);
-}
-
-.sync-pill.off .sync-dot{
-  background:var(--danger);
-}
-
-.scoreboard{
-  max-width:1000px;
-  margin:18px auto 0;
-  padding:0 16px;
-}
-
-.scoreboard-panel{
-  background:linear-gradient(180deg,var(--surface-2),var(--surface));
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:18px 22px;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  gap:14px;
-  position:relative;
-  overflow:hidden;
-}
-
-.scoreboard-panel::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:repeating-linear-gradient(
-    90deg,
-    var(--court-line) 0 1px,
-    transparent 1px 46px
-  );
-  pointer-events:none;
-}
-
-.sb-player{
-  text-align:center;
-}
-
-.sb-player .name{
-  font-size:13px;
-  color:var(--muted);
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-}
-
-.sb-player .pts{
-  font-family:'Roboto Mono',monospace;
-  font-weight:700;
-  font-size:42px;
-  line-height:1;
-  margin-top:4px;
-}
-
-.sb-player.henrik .pts{
-  color:var(--henrik);
-  text-shadow:0 0 18px rgba(45,212,191,0.35);
-}
-
-.sb-player.steen .pts{
-  color:var(--steen);
-  text-shadow:0 0 18px rgba(255,183,3,0.35);
-}
-
-.sb-vs{
-  font-family:'Oswald',sans-serif;
-  color:var(--muted);
-  font-size:13px;
-  letter-spacing:0.15em;
-}
-
-
-nav.tabs{
-  max-width:1000px;
-  margin:18px auto 0;
-  padding:0 16px;
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-}
-
-nav.tabs button{
-  background:var(--surface);
-  border:1px solid var(--border);
-  color:var(--muted);
-  padding:9px 14px;
-  border-radius:9px;
-  font-family:'Oswald',sans-serif;
-  font-size:12.5px;
-  letter-spacing:0.05em;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:all .15s;
-}
-
-nav.tabs button:hover{
-  color:var(--text);
-  border-color:var(--surface-3);
-}
-
-nav.tabs button.active{
-  background:var(--surface-3);
-  color:var(--text);
-  border-color:var(--steen);
-}
-
-main{
-  max-width:1000px;
-  margin:22px auto 0;
-  padding:0 16px;
-}
-
-
-.card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:16px 18px;
-  margin-bottom:14px;
-}
-
-.card h2{
-  font-size:16px;
-  color:var(--text);
-  margin-bottom:2px;
-}
-
-.subtle{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-
-.row.between{
-  justify-content:space-between;
-}
-
-select,
-input[type=text],
-input[type=number],
-input[type=datetime-local]{
-  background:var(--surface-2);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:8px 10px;
-  border-radius:7px;
-  font-family:'Inter',sans-serif;
-  font-size:14px;
-}
-
-select:focus,
-input:focus{
-  outline:2px solid var(--steen);
-  outline-offset:1px;
-}
-
-input[type=number]{
-  width:64px;
-  font-family:'Roboto Mono',monospace;
-  text-align:center;
-}
-
-button.btn{
-  background:var(--surface-3);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:8px 14px;
-  border-radius:7px;
-  font-family:'Oswald',sans-serif;
-  text-transform:uppercase;
-  letter-spacing:0.04em;
-  font-size:12.5px;
-  cursor:pointer;
-}
-
-button.btn:hover{
-  border-color:var(--steen);
-}
-
-button.btn.primary{
-  background:var(--steen);
-  color:#1a1400;
-  border-color:var(--steen);
-  font-weight:700;
-}
-
-button.btn.ghost{
-  background:transparent;
-}
-
-button.btn.danger{
-  color:var(--danger);
-  border-color:var(--danger);
-  background:transparent;
-}
-
-button.btn:disabled{
-  opacity:0.4;
-  cursor:not-allowed;
-}
-
-button.btn.small{
-  padding:5px 10px;
-  font-size:11px;
-}
-
-.player-switch{
-  display:flex;
-  gap:8px;
-  margin-bottom:16px;
-}
-
-.player-switch button{
-  flex:1;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:var(--surface);
-  color:var(--muted);
-  font-family:'Oswald',sans-serif;
-  text-transform:uppercase;
-  letter-spacing:0.05em;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.player-switch button.active.henrik{
-  border-color:var(--henrik);
-  color:var(--henrik);
-  background:rgba(45,212,191,0.08);
-}
-
-.player-switch button.active.steen{
-  border-color:var(--steen);
-  color:var(--steen);
-  background:rgba(255,183,3,0.08);
-}
-
-.round-select{
-  margin-bottom:16px;
-}
-
-.match-card{
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:14px;
-  margin-bottom:10px;
-  background:var(--surface-2);
-}
-
-.match-card.locked{
-  opacity:0.9;
-}
-
-.match-teams{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  gap:8px;
-  margin-bottom:10px;
-}
-
-.match-teams .team{
-  font-family:'Oswald',sans-serif;
-  font-size:14.5px;
-}
-
-.match-teams .team.away{
-  text-align:right;
-}
-
-.score-inputs{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
-
-.score-inputs .dash{
-  color:var(--muted);
-  font-family:'Roboto Mono',monospace;
-}
-
-.scorer-inputs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.scorer-inputs .field label{
-  display:block;
-  font-size:11px;
-  color:var(--muted);
-  margin-bottom:4px;
-  text-transform:uppercase;
-  letter-spacing:0.04em;
-}
-
-.scorer-inputs input{
-  width:100%;
-}
-
-.match-footer{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:10px;
-  padding-top:10px;
-  border-top:1px dashed var(--border);
-}
-
-.badge{
-  font-size:11px;
-  padding:3px 9px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  color:var(--muted);
-}
-
-.badge.locked{
-  color:var(--danger);
-  border-color:var(--danger);
-}
-
-.badge.points{
-  color:#1a1400;
-  background:var(--steen);
-  border-color:var(--steen);
-  font-weight:700;
-}
-
-.badge.points.zero{
-  background:transparent;
-  color:var(--muted);
-}
-
-.result-card{
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:14px;
-  margin-bottom:10px;
-  background:var(--surface-2);
-}
-
-.topscorer-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-top:10px;
-}
-
-.topscorer-grid h4{
-  font-size:11px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:0.05em;
-  margin:0 0 6px;
-}
-
-.ts-row{
-  display:flex;
-  gap:6px;
-  margin-bottom:6px;
-}
-
-.ts-row input[type=text]{
-  flex:1;
-  min-width:0;
-}
-
-.ts-row input[type=number]{
-  width:52px;
-}
-
-table.stand{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:6px;
-}
-
-table.stand th,
-table.stand td{
-  padding:8px 10px;
-  text-align:left;
-  border-bottom:1px solid var(--border);
-  font-size:13.5px;
-}
-
-table.stand th{
-  color:var(--muted);
-  font-weight:600;
-  text-transform:uppercase;
-  font-size:11px;
-  letter-spacing:0.04em;
-}
-
-table.stand td.num{
-  font-family:'Roboto Mono',monospace;
-  text-align:right;
-}
-
-.round-block{
-  border:1px solid var(--border);
-  border-radius:10px;
-  margin-bottom:10px;
-  background:var(--surface-2);
-}
-
-.round-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 14px;
-  cursor:pointer;
-}
-
-.round-header h3{
-  font-size:14.5px;
-}
-
-.round-body{
-  padding:0 14px 14px;
-  display:none;
-}
-
-.round-body.open{
-  display:block;
-}
-
-.mini-match{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:7px 0;
-  border-bottom:1px solid var(--border);
-  font-size:13.5px;
-}
-
-.mini-match:last-child{
-  border-bottom:none;
-}
-
-.add-match-row{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  margin-top:10px;
-  flex-wrap:wrap;
-}
-
-.teams-list{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:10px;
-}
-
-.team-edit-row{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  background:var(--surface-2);
-  border:1px solid var(--border);
-  border-radius:7px;
-  padding:6px 8px;
-}
-
-.team-edit-row input{
-  flex:1;
-  min-width:0;
-}
-
-.settings-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-top:10px;
-}
-
-.settings-field label{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:5px;
-}
-
-.settings-field input{
-  width:80px;
-}
-
-.empty{
-  color:var(--muted);
-  font-size:13.5px;
-  padding:18px;
-  text-align:center;
-  border:1px dashed var(--border);
-  border-radius:10px;
-}
-
-.footer-note{
-  color:var(--muted);
-  font-size:12px;
-  text-align:center;
-  margin-top:30px;
-  line-height:1.6;
-}
-
-.footer-note a{
-  color:var(--henrik);
-}
-
-.bars{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  margin-top:14px;
-}
-
-.bar-row{
-  display:grid;
-  grid-template-columns:80px 1fr 40px;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-}
-
-.bar-track{
-  background:var(--surface-2);
-  border-radius:6px;
-  overflow:hidden;
-  height:10px;
-  position:relative;
-  border:1px solid var(--border);
-}
-
-.bar-fill{
-  height:100%;
-  border-radius:6px;
-}
-
-.toast{
-  position:fixed;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-  background:var(--surface-3);
-  border:1px solid var(--steen);
-  color:var(--text);
-  padding:9px 18px;
-  border-radius:8px;
-  font-size:13px;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .25s,transform .25s;
-  z-index:50;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(-6px);
-}
-
-@media(max-width:560px){
-  .scoreboard-panel{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-
-  .sb-vs{
-    order:3;
-  }
-
-  .topscorer-grid{
-    grid-template-columns:1fr;
-  }
-
-  .settings-grid{
-    grid-template-columns:1fr;
-  }
-
-  .teams-list{
-    grid-template-columns:1fr;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Håndboldliga Tips 2026/27</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root{
+      --bg:#12161d;
+      --surface:#1b212b;
+      --surface-2:#232a36;
+      --surface-3:#2a3140;
+      --border:#2f3746;
+      --text:#eef1f5;
+      --muted:#8993a4;
+
+      --henrik:#2dd4bf;
+      --henrik-dim:#134e4a;
+
+      --steen:#ffb703;
+      --steen-dim:#5c4308;
+
+      --success:#4ade80;
+      --danger:#f87171;
+      --info:#60a5fa;
+
+      --court-line:rgba(255,255,255,0.06);
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html,body{
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      background:
+        radial-gradient(
+          circle at 15% -10%,
+          rgba(45,212,191,0.08),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(255,183,3,0.08),
+          transparent 40%
+        ),
+        var(--bg);
+
+      color:var(--text);
+      font-family:'Inter',system-ui,-apple-system,sans-serif;
+      min-height:100vh;
+    }
+
+    h1,h2,h3,.display{
+      font-family:'Oswald',system-ui,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+      font-weight:600;
+      margin:0;
+    }
+
+    .mono{
+      font-family:'Roboto Mono',monospace;
+    }
+
+    .wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:0 16px 64px;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    header.top{
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(
+        180deg,
+        rgba(255,255,255,0.02),
+        transparent
+      );
+      padding:20px 0 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      max-width:1000px;
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    .brand h1{
+      font-size:20px;
+      letter-spacing:0.06em;
+    }
+
+    .brand h1 span{
+      color:var(--steen);
+    }
+
+    .sync-pill{
+      font-size:11px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:4px 10px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+
+    .sync-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--muted);
+    }
+
+    .sync-pill.on .sync-dot{
+      background:var(--success);
+    }
+
+    .sync-pill.off .sync-dot{
+      background:var(--danger);
+    }
+
+    .scoreboard{
+      max-width:1000px;
+      margin:18px auto 0;
+      padding:0 16px;
+    }
+
+    .scoreboard-panel{
+      background:linear-gradient(
+        180deg,
+        var(--surface-2),
+        var(--surface)
+      );
+
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px 22px;
+
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:14px;
+
+      position:relative;
+      overflow:hidden;
+    }
+
+    .scoreboard-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+
+      background-image:repeating-linear-gradient(
+        90deg,
+        var(--court-line) 0 1px,
+        transparent 1px 46px
+      );
+
+      pointer-events:none;
+    }
+
+    .sb-player{
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
+
+    .sb-player .name{
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+
+    .sb-player .pts{
+      font-family:'Roboto Mono',monospace;
+      font-weight:700;
+      font-size:42px;
+      line-height:1;
+      margin-top:4px;
+    }
+
+    .sb-player.henrik .pts{
+      color:var(--henrik);
+      text-shadow:0 0 18px rgba(45,212,191,0.35);
+    }
+
+    .sb-player.steen .pts{
+      color:var(--steen);
+      text-shadow:0 0 18px rgba(255,183,3,0.35);
+    }
+
+    .sb-vs{
+      position:relative;
+      z-index:1;
+
+      font-family:'Oswald',sans-serif;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:0.15em;
+    }
+
+    /* =========================================================
+       NAV
+       ========================================================= */
+
+    nav.tabs{
+      max-width:1000px;
+      margin:18px auto 0;
+      padding:0 16px;
+
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+
+    nav.tabs button{
+      background:var(--surface);
+      border:1px solid var(--border);
+      color:var(--muted);
+
+      padding:9px 14px;
+      border-radius:9px;
+
+      font-family:'Oswald',sans-serif;
+      font-size:12.5px;
+      letter-spacing:0.05em;
+      text-transform:uppercase;
+
+      cursor:pointer;
+      transition:all .15s;
+    }
+
+    nav.tabs button:hover{
+      color:var(--text);
+      border-color:var(--surface-3);
+    }
+
+    nav.tabs button.active{
+      background:var(--surface-3);
+      color:var(--text);
+      border-color:var(--steen);
+    }
+
+    main{
+      max-width:1000px;
+      margin:22px auto 0;
+      padding:0 16px;
+    }
+
+    /* =========================================================
+       GENERIC
+       ========================================================= */
+
+    .card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:16px 18px;
+      margin-bottom:14px;
+    }
+
+    .card h2{
+      font-size:16px;
+      color:var(--text);
+      margin-bottom:2px;
+    }
+
+    .subtle{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .row.between{
+      justify-content:space-between;
+    }
+
+    select,
+    input[type=text],
+    input[type=number],
+    input[type=datetime-local]{
+      background:var(--surface-2);
+      border:1px solid var(--border);
+      color:var(--text);
+
+      padding:8px 10px;
+      border-radius:7px;
+
+      font-family:'Inter',sans-serif;
+      font-size:14px;
+    }
+
+    select{
+      max-width:100%;
+    }
+
+    select:focus,
+    input:focus{
+      outline:2px solid var(--steen);
+      outline-offset:1px;
+    }
+
+    input[type=number]{
+      width:64px;
+      font-family:'Roboto Mono',monospace;
+      text-align:center;
+    }
+
+    button.btn{
+      background:var(--surface-3);
+      border:1px solid var(--border);
+      color:var(--text);
+
+      padding:8px 14px;
+      border-radius:7px;
+
+      font-family:'Oswald',sans-serif;
+      text-transform:uppercase;
+      letter-spacing:0.04em;
+      font-size:12.5px;
+
+      cursor:pointer;
+    }
+
+    button.btn:hover{
+      border-color:var(--steen);
+    }
+
+    button.btn.primary{
+      background:var(--steen);
+      color:#1a1400;
+      border-color:var(--steen);
+      font-weight:700;
+    }
+
+    button.btn.ghost{
+      background:transparent;
+    }
+
+    button.btn.danger{
+      color:var(--danger);
+      border-color:var(--danger);
+      background:transparent;
+    }
+
+    button.btn.info{
+      color:var(--info);
+      border-color:var(--info);
+      background:transparent;
+    }
+
+    button.btn:disabled{
+      opacity:0.4;
+      cursor:not-allowed;
+    }
+
+    button.btn.small{
+      padding:5px 10px;
+      font-size:11px;
+    }
+
+    /* =========================================================
+       PLAYER SWITCH
+       ========================================================= */
+
+    .player-switch{
+      display:flex;
+      gap:8px;
+      margin-bottom:16px;
+    }
+
+    .player-switch button{
+      flex:1;
+
+      padding:12px;
+      border-radius:10px;
+
+      border:1px solid var(--border);
+      background:var(--surface);
+      color:var(--muted);
+
+      font-family:'Oswald',sans-serif;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    .player-switch button.active.henrik{
+      border-color:var(--henrik);
+      color:var(--henrik);
+      background:rgba(45,212,191,0.08);
+    }
+
+    .player-switch button.active.steen{
+      border-color:var(--steen);
+      color:var(--steen);
+      background:rgba(255,183,3,0.08);
+    }
+
+    /* =========================================================
+       MATCHES
+       ========================================================= */
+
+    .round-select{
+      margin-bottom:16px;
+    }
+
+    .match-card{
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:14px;
+      margin-bottom:10px;
+      background:var(--surface-2);
+    }
+
+    .match-card.locked{
+      opacity:0.9;
+    }
+
+    .match-teams{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+    }
+
+    .match-teams .team{
+      font-family:'Oswald',sans-serif;
+      font-size:14.5px;
+    }
+
+    .match-teams .team.away{
+      text-align:right;
+    }
+
+    .score-inputs{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .score-inputs .dash{
+      color:var(--muted);
+      font-family:'Roboto Mono',monospace;
+    }
+
+    .scorer-inputs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .scorer-inputs .field label{
+      display:block;
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:4px;
+      text-transform:uppercase;
+      letter-spacing:0.04em;
+    }
+
+    .scorer-inputs select{
+      width:100%;
+    }
+
+    .match-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px dashed var(--border);
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .badge{
+      font-size:11px;
+      padding:3px 9px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+    }
+
+    .badge.locked{
+      color:var(--danger);
+      border-color:var(--danger);
+    }
+
+    .badge.points{
+      color:#1a1400;
+      background:var(--steen);
+      border-color:var(--steen);
+      font-weight:700;
+    }
+
+    .badge.points.zero{
+      background:transparent;
+      color:var(--muted);
+    }
+
+    /* =========================================================
+       RESULTS
+       ========================================================= */
+
+    .result-card{
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:14px;
+      margin-bottom:10px;
+      background:var(--surface-2);
+    }
+
+    .topscorer-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:10px;
+    }
+
+    .topscorer-grid h4{
+      font-size:11px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+      margin:0 0 6px;
+    }
+
+    .ts-row{
+      display:flex;
+      gap:6px;
+      margin-bottom:6px;
+    }
+
+    .ts-row select{
+      flex:1;
+      min-width:0;
+    }
+
+    .ts-row input[type=number]{
+      width:52px;
+    }
+
+    /* =========================================================
+       STANDINGS
+       ========================================================= */
+
+    table.stand{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:6px;
+    }
+
+    table.stand th,
+    table.stand td{
+      padding:8px 10px;
+      text-align:left;
+      border-bottom:1px solid var(--border);
+      font-size:13.5px;
+    }
+
+    table.stand th{
+      color:var(--muted);
+      font-weight:600;
+      text-transform:uppercase;
+      font-size:11px;
+      letter-spacing:0.04em;
+    }
+
+    table.stand td.num{
+      font-family:'Roboto Mono',monospace;
+      text-align:right;
+    }
+
+    .bars{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .bar-row{
+      display:grid;
+      grid-template-columns:80px 1fr 40px;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+    }
+
+    .bar-track{
+      background:var(--surface-2);
+      border-radius:6px;
+      overflow:hidden;
+      height:10px;
+      position:relative;
+      border:1px solid var(--border);
+    }
+
+    .bar-fill{
+      height:100%;
+      border-radius:6px;
+    }
+
+    /* =========================================================
+       ROUNDS
+       ========================================================= */
+
+    .round-block{
+      border:1px solid var(--border);
+      border-radius:10px;
+      margin-bottom:10px;
+      background:var(--surface-2);
+    }
+
+    .round-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 14px;
+      cursor:pointer;
+      gap:10px;
+    }
+
+    .round-header h3{
+      font-size:14.5px;
+    }
+
+    .round-body{
+      padding:0 14px 14px;
+      display:none;
+    }
+
+    .round-body.open{
+      display:block;
+    }
+
+    .mini-match{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:7px 0;
+      border-bottom:1px solid var(--border);
+      font-size:13.5px;
+      gap:10px;
+    }
+
+    .mini-match:last-child{
+      border-bottom:none;
+    }
+
+    .add-match-row{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+
+    /* =========================================================
+       SETTINGS
+       ========================================================= */
+
+    .teams-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .team-settings-card{
+      background:var(--surface-2);
+      border:1px solid var(--border);
+      border-radius:9px;
+      overflow:hidden;
+    }
+
+    .team-settings-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:9px;
+      cursor:pointer;
+    }
+
+    .team-settings-header:hover{
+      background:rgba(255,255,255,0.025);
+    }
+
+    .team-settings-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+      flex:1;
+    }
+
+    .team-settings-title input{
+      flex:1;
+      min-width:0;
+    }
+
+    .team-settings-count{
+      color:var(--muted);
+      font-size:11px;
+      white-space:nowrap;
+    }
+
+    .team-settings-body{
+      display:none;
+      border-top:1px solid var(--border);
+      padding:10px;
+    }
+
+    .team-settings-body.open{
+      display:block;
+    }
+
+    .players-list{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .player-edit-row{
+      display:grid;
+      grid-template-columns:48px 1fr 130px auto;
+      gap:7px;
+      align-items:center;
+
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:8px;
+      padding:7px;
+    }
+
+    .player-photo{
+      width:48px;
+      height:48px;
+      border-radius:7px;
+      object-fit:cover;
+      background:var(--surface-3);
+      border:1px solid var(--border);
+    }
+
+    .player-photo-placeholder{
+      width:48px;
+      height:48px;
+      border-radius:7px;
+      background:var(--surface-3);
+      border:1px solid var(--border);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      color:var(--muted);
+      font-family:'Oswald',sans-serif;
+      font-size:17px;
+    }
+
+    .player-fields{
+      display:grid;
+      grid-template-columns:1fr 130px;
+      gap:7px;
+      min-width:0;
+    }
+
+    .player-fields input,
+    .player-fields select{
+      width:100%;
+      min-width:0;
+    }
+
+    .player-actions{
+      display:flex;
+      gap:5px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .player-add-box{
+      margin-top:9px;
+      padding-top:9px;
+      border-top:1px dashed var(--border);
+    }
+
+    .player-add-fields{
+      display:grid;
+      grid-template-columns:1fr 130px auto;
+      gap:7px;
+    }
+
+    .player-add-fields input,
+    .player-add-fields select{
+      width:100%;
+      min-width:0;
+    }
+
+    .photo-upload-label{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+
+      padding:6px 9px;
+      border:1px solid var(--border);
+      border-radius:6px;
+
+      color:var(--muted);
+      background:var(--surface-3);
+
+      font-family:'Oswald',sans-serif;
+      font-size:10px;
+      text-transform:uppercase;
+
+      cursor:pointer;
+    }
+
+    .photo-upload-label:hover{
+      border-color:var(--steen);
+      color:var(--text);
+    }
+
+    .photo-upload-input{
+      display:none;
+    }
+
+    .player-preview{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top:10px;
+      padding:8px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:8px;
+    }
+
+    .player-preview img{
+      width:46px;
+      height:46px;
+      object-fit:cover;
+      border-radius:7px;
+    }
+
+    .settings-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:10px;
+    }
+
+    .settings-field label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:5px;
+    }
+
+    .settings-field input{
+      width:80px;
+    }
+
+    /* =========================================================
+       EMPTY / FOOTER
+       ========================================================= */
+
+    .empty{
+      color:var(--muted);
+      font-size:13.5px;
+      padding:18px;
+      text-align:center;
+      border:1px dashed var(--border);
+      border-radius:10px;
+    }
+
+    .footer-note{
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      margin-top:30px;
+      line-height:1.6;
+    }
+
+    .footer-note a{
+      color:var(--henrik);
+    }
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    .toast{
+      position:fixed;
+      bottom:18px;
+      left:50%;
+
+      transform:translateX(-50%);
+
+      background:var(--surface-3);
+      border:1px solid var(--steen);
+      color:var(--text);
+
+      padding:9px 18px;
+      border-radius:8px;
+
+      font-size:13px;
+
+      opacity:0;
+      pointer-events:none;
+
+      transition:
+        opacity .25s,
+        transform .25s;
+
+      z-index:50;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-6px);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media(max-width:700px){
+
+      .player-edit-row{
+        grid-template-columns:48px 1fr auto;
+      }
+
+      .player-fields{
+        grid-column:2 / 4;
+        grid-row:2;
+        grid-template-columns:1fr 1fr;
+      }
+
+      .player-actions{
+        grid-column:3;
+        grid-row:1;
+      }
+
+      .player-add-fields{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .player-add-fields button{
+        grid-column:1 / -1;
+      }
+    }
+
+    @media(max-width:560px){
+
+      .scoreboard-panel{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+
+      .sb-vs{
+        order:3;
+      }
+
+      .topscorer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .settings-grid{
+        grid-template-columns:1fr;
+      }
+
+      .teams-list{
+        grid-template-columns:1fr;
+      }
+
+      .scorer-inputs{
+        grid-template-columns:1fr;
+      }
+
+      .match-teams{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+
+      .match-teams .team.away{
+        text-align:center;
+      }
+
+      .score-inputs{
+        order:2;
+      }
+
+      .match-teams .team:first-child{
+        order:1;
+      }
+
+      .match-teams .team.away{
+        order:3;
+      }
+
+      .player-add-fields{
+        grid-template-columns:1fr;
+      }
+
+      .player-add-fields button{
+        grid-column:auto;
+      }
+
+      .player-fields{
+        grid-template-columns:1fr;
+      }
+
+      .player-edit-row{
+        grid-template-columns:48px 1fr auto;
+      }
+    }
+  </style>
 </head>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDmv3DgIScVWP3tq2SSapS_R9w49gviCFI",
-    authDomain: "handball-26-27.firebaseapp.com",
-    projectId: "handball-26-27",
-    storageBucket: "handball-26-27.firebasestorage.app",
-    messagingSenderId: "660609138006",
-    appId: "1:660609138006:web:1b5871be1a46944c60aaf7",
-    measurementId: "G-BPJX8TMSMT"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
 <body>
 
 <header class="top">
 
   <div class="brand">
-    <h1>Håndbold<span>Tips</span> 26/27</h1>
 
-    <div class="sync-pill off" id="syncPill">
+    <h1>
+      Håndbold<span>Tips</span> 26/27
+    </h1>
+
+    <div
+      class="sync-pill off"
+      id="syncPill"
+    >
       <span class="sync-dot"></span>
-      <span id="syncLabel">Lokal lagring</span>
+      <span id="syncLabel">
+        Lokal lagring
+      </span>
     </div>
+
   </div>
 
   <div class="scoreboard">
+
     <div class="scoreboard-panel">
 
       <div class="sb-player henrik">
-        <div class="name">Henrik</div>
-        <div class="pts mono" id="sbHenrik">0</div>
+
+        <div class="name">
+          Henrik
+        </div>
+
+        <div
+          class="pts mono"
+          id="sbHenrik"
+        >
+          0
+        </div>
+
       </div>
 
-      <div class="sb-vs">VS</div>
+      <div class="sb-vs">
+        VS
+      </div>
 
       <div class="sb-player steen">
-        <div class="name">Steen</div>
-        <div class="pts mono" id="sbSteen">0</div>
+
+        <div class="name">
+          Steen
+        </div>
+
+        <div
+          class="pts mono"
+          id="sbSteen"
+        >
+          0
+        </div>
+
       </div>
 
     </div>
+
   </div>
 
-  <nav class="tabs" id="tabs">
-    <button data-tab="predictions" class="active">Forudsigelser</button>
-    <button data-tab="rounds">Runder &amp; Kampe</button>
-    <button data-tab="results">Resultater</button>
-    <button data-tab="standings">Stilling</button>
-    <button data-tab="settings">Indstillinger</button>
+  <nav
+    class="tabs"
+    id="tabs"
+  >
+
+    <button
+      data-tab="predictions"
+      class="active"
+    >
+      Forudsigelser
+    </button>
+
+    <button data-tab="rounds">
+      Runder &amp; Kampe
+    </button>
+
+    <button data-tab="results">
+      Resultater
+    </button>
+
+    <button data-tab="standings">
+      Stilling
+    </button>
+
+    <button data-tab="settings">
+      Indstillinger
+    </button>
+
   </nav>
 
 </header>
 
 <main id="app"></main>
 
-<div class="toast" id="toast"></div>
+<div
+  class="toast"
+  id="toast"
+></div>
 
 <script src="config.js"></script>
 
 <script>
 
+/* =========================================================
+   HÅNDBOLD TIPS 2026/27
+   ========================================================= */
 
-const STORAGE_KEY = 'hbpredictor_v1';
+const STORAGE_KEY = 'hbpredictor_v2';
 
 const DEFAULT_TEAMS = [
   "Aalborg Håndbold",
@@ -796,81 +1181,236 @@ const DEFAULT_TEAMS = [
   "Bjerringbro-Silkeborg"
 ];
 
+const POSITIONS = [
+  "Målmand",
+  "Venstre fløj",
+  "Højre fløj",
+  "Venstre back",
+  "Højre back",
+  "Playmaker",
+  "Streg",
+  "Andet"
+];
 
+
+/* =========================================================
+   BASIC DATA
+   ========================================================= */
 
 function uid(prefix){
+
   return prefix + '_' +
     Date.now().toString(36) +
     Math.random().toString(36).slice(2,7);
+
 }
+
 
 function defaultData(){
+
   return {
+
     teams: DEFAULT_TEAMS.map(name => ({
-      id: uid('t'),
-      name
+      id:uid('t'),
+      name,
+      players:[]
     })),
 
-    rounds: [],
+    rounds:[],
 
-    predictions: {
-      henrik: {},
-      steen: {}
+    predictions:{
+      henrik:{},
+      steen:{}
     },
 
-    settings: {
-      winner: 2,
-      exact: 1,
-      bonus: 3,
-      topscorer: 1
+    settings:{
+      winner:2,
+      exact:1,
+      bonus:3,
+      topscorer:1
     },
 
-    updatedAt: Date.now()
+    updatedAt:Date.now()
+
   };
+
 }
 
-let data = loadLocal() || defaultData();
+
+let data =
+  loadLocal() ||
+  defaultData();
+
 
 let activeTab = 'predictions';
+
 let activePlayer = 'henrik';
 
 let openRounds = new Set();
 
+let openTeams = new Set();
+
 let predRoundId = null;
+
 let resultRoundId = null;
 
 
+/* =========================================================
+   DATA MIGRATION
+   ========================================================= */
+
+function migrateData(){
+
+  let changed = false;
+
+  if(!Array.isArray(data.teams)){
+
+    data.teams = [];
+
+    changed = true;
+
+  }
+
+
+  data.teams.forEach(team => {
+
+    if(!Array.isArray(team.players)){
+
+      team.players = [];
+
+      changed = true;
+
+    }
+
+  });
+
+
+  if(!data.predictions){
+
+    data.predictions = {
+      henrik:{},
+      steen:{}
+    };
+
+    changed = true;
+
+  }
+
+
+  if(!data.predictions.henrik){
+
+    data.predictions.henrik = {};
+
+    changed = true;
+
+  }
+
+
+  if(!data.predictions.steen){
+
+    data.predictions.steen = {};
+
+    changed = true;
+
+  }
+
+
+  if(!data.settings){
+
+    data.settings = {
+      winner:2,
+      exact:1,
+      bonus:3,
+      topscorer:1
+    };
+
+    changed = true;
+
+  }
+
+
+  if(changed){
+
+    data.updatedAt = Date.now();
+
+  }
+
+}
+
+
+migrateData();
+
+
+/* =========================================================
+   LOCAL STORAGE
+   ========================================================= */
 
 function loadLocal(){
+
   try{
-    const raw = localStorage.getItem(STORAGE_KEY);
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
 
     if(!raw){
-      return null;
+
+      /*
+       * Try the old version too.
+       */
+      const oldRaw =
+        localStorage.getItem(
+          'hbpredictor_v1'
+        );
+
+      if(!oldRaw){
+        return null;
+      }
+
+      return JSON.parse(oldRaw);
     }
 
     return JSON.parse(raw);
 
   }catch(e){
-    console.error('Could not load local data:', e);
+
+    console.error(
+      'Could not load local data:',
+      e
+    );
+
     return null;
+
   }
+
 }
 
+
 function saveLocal(){
+
   data.updatedAt = Date.now();
 
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(data)
   );
+
 }
 
 
+/* =========================================================
+   FIREBASE
+   ========================================================= */
 
 let fbEnabled = false;
+
 let fbDoc = null;
+
+let fbStorage = null;
+
 let fbSaveTimer = null;
+
 let fbApplyingRemote = false;
 
 
@@ -880,43 +1420,96 @@ async function initFirebase(){
     !window.FIREBASE_CONFIG ||
     !window.FIREBASE_CONFIG.apiKey
   ){
-    setSyncStatus(false, 'Lokal lagring');
+
+    setSyncStatus(
+      false,
+      'Lokal lagring'
+    );
+
     return;
   }
 
+
   try{
 
+    /*
+     * Firebase Core
+     */
     await loadScript(
       'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js'
     );
 
+
+    /*
+     * Authentication
+     */
     await loadScript(
       'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js'
     );
 
+
+    /*
+     * Firestore
+     */
     await loadScript(
       'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js'
     );
 
 
+    /*
+     * Firebase Storage
+     */
+    await loadScript(
+      'https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js'
+    );
+
+
+    /*
+     * Initialize Firebase
+     */
     if(!firebase.apps.length){
+
       firebase.initializeApp(
         window.FIREBASE_CONFIG
       );
+
     }
 
-    const auth = firebase.auth();
-    const db = firebase.firestore();
 
-    setSyncStatus(false, 'Logger ind...');
+    const auth =
+      firebase.auth();
 
+    const db =
+      firebase.firestore();
+
+    fbStorage =
+      firebase.storage();
+
+
+    setSyncStatus(
+      false,
+      'Logger ind...'
+    );
+
+
+    /*
+     * Anonymous login
+     */
     await auth.signInAnonymously();
 
-    fbDoc = db
-      .collection('handball-predictor')
-      .doc('shared');
+
+    /*
+     * Shared Firestore document
+     */
+    fbDoc =
+      db
+        .collection('handball-predictor')
+        .doc('shared');
 
 
+    /*
+     * Listen for live updates
+     */
     fbDoc.onSnapshot(
 
       snap => {
@@ -926,22 +1519,33 @@ async function initFirebase(){
           fbDoc
             .set(data)
             .then(() => {
-              setSyncStatus(true, 'Synkroniseret');
+
+              setSyncStatus(
+                true,
+                'Synkroniseret'
+              );
+
             })
             .catch(error => {
+
               console.error(
                 'Initial Firestore write failed:',
                 error
               );
 
-              setSyncStatus(false, 'Sync-fejl');
+              setSyncStatus(
+                false,
+                'Sync-fejl'
+              );
+
             });
 
           return;
         }
 
 
-        const remote = snap.data();
+        const remote =
+          snap.data();
 
 
         if(
@@ -954,6 +1558,8 @@ async function initFirebase(){
 
           data = remote;
 
+          migrateData();
+
           localStorage.setItem(
             STORAGE_KEY,
             JSON.stringify(data)
@@ -962,10 +1568,14 @@ async function initFirebase(){
           render();
 
           fbApplyingRemote = false;
+
         }
 
 
-        setSyncStatus(true, 'Synkroniseret');
+        setSyncStatus(
+          true,
+          'Synkroniseret'
+        );
 
       },
 
@@ -976,14 +1586,23 @@ async function initFirebase(){
           error
         );
 
-        setSyncStatus(false, 'Sync-fejl');
+        setSyncStatus(
+          false,
+          'Sync-fejl'
+        );
+
       }
+
     );
 
 
     fbEnabled = true;
 
-    setSyncStatus(true, 'Synkroniseret');
+
+    setSyncStatus(
+      true,
+      'Synkroniseret'
+    );
 
 
   }catch(error){
@@ -997,47 +1616,104 @@ async function initFirebase(){
       false,
       'Sync ikke tilgængelig'
     );
+
   }
+
 }
 
 
+/* =========================================================
+   DYNAMIC SCRIPT
+   ========================================================= */
 
 function loadScript(src){
 
-  return new Promise((resolve,reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const script = document.createElement('script');
+      /*
+       * Don't load the same script twice.
+       */
+      const existing =
+        document.querySelector(
+          `script[src="${src}"]`
+        );
 
-    script.src = src;
+      if(existing){
 
-    script.onload = resolve;
+        existing.addEventListener(
+          'load',
+          resolve,
+          {once:true}
+        );
 
-    script.onerror = reject;
+        return;
+      }
 
-    document.head.appendChild(script);
-  });
+
+      const script =
+        document.createElement(
+          'script'
+        );
+
+      script.src = src;
+
+      script.onload = resolve;
+
+      script.onerror = reject;
+
+      document.head.appendChild(
+        script
+      );
+
+    }
+  );
+
 }
 
 
-function setSyncStatus(on,label){
+/* =========================================================
+   SYNC STATUS
+   ========================================================= */
+
+function setSyncStatus(
+  on,
+  label
+){
 
   const pill =
-    document.getElementById('syncPill');
+    document.getElementById(
+      'syncPill'
+    );
 
-  pill.classList.toggle('on',on);
+  if(!pill){
+    return;
+  }
 
-  pill.classList.toggle('off',!on);
+  pill.classList.toggle(
+    'on',
+    on
+  );
+
+  pill.classList.toggle(
+    'off',
+    !on
+  );
 
   document.getElementById(
     'syncLabel'
   ).textContent = label;
+
 }
 
+
+/* =========================================================
+   PERSIST
+   ========================================================= */
 
 function persist(){
 
   saveLocal();
-
 
 
   if(
@@ -1046,29 +1722,120 @@ function persist(){
     !fbApplyingRemote
   ){
 
-    clearTimeout(fbSaveTimer);
+    clearTimeout(
+      fbSaveTimer
+    );
 
-    fbSaveTimer = setTimeout(() => {
 
-      fbDoc
-        .set(data)
-        .then(() => {
-          setSyncStatus(true, 'Synkroniseret');
-        })
-        .catch(error => {
+    fbSaveTimer =
+      setTimeout(
+        () => {
 
-          console.error(
-            'Firestore write failed:',
-            error
-          );
+          fbDoc
+            .set(data)
+            .then(() => {
 
-          setSyncStatus(false,'Sync-fejl');
-        });
+              setSyncStatus(
+                true,
+                'Synkroniseret'
+              );
 
-    },400);
+            })
+            .catch(error => {
+
+              console.error(
+                'Firestore write failed:',
+                error
+              );
+
+              setSyncStatus(
+                false,
+                'Sync-fejl'
+              );
+
+            });
+
+        },
+        400
+      );
+
   }
+
 }
 
+
+/* =========================================================
+   FIREBASE STORAGE
+   ========================================================= */
+
+async function uploadPlayerPhoto(
+  teamId,
+  playerId,
+  file
+){
+
+  if(!fbStorage){
+
+    throw new Error(
+      'Firebase Storage er ikke tilgængelig.'
+    );
+
+  }
+
+
+  if(!file.type.startsWith('image/')){
+
+    throw new Error(
+      'Filen skal være et billede.'
+    );
+
+  }
+
+
+  /*
+   * Limit to 5 MB.
+   */
+  if(file.size > 5 * 1024 * 1024){
+
+    throw new Error(
+      'Billedet må højst være 5 MB.'
+    );
+
+  }
+
+
+  const extension =
+    file.name
+      .split('.')
+      .pop()
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g,'');
+
+
+  const path =
+    `players/${teamId}/${playerId}.${extension}`;
+
+
+  const ref =
+    fbStorage.ref(path);
+
+
+  await ref.put(
+    file,
+    {
+      contentType:file.type
+    }
+  );
+
+
+  return await ref.getDownloadURL();
+
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
 function teamName(id){
 
@@ -1080,6 +1847,60 @@ function teamName(id){
   return team
     ? team.name
     : '?';
+
+}
+
+
+function getTeam(id){
+
+  return data.teams.find(
+    t => t.id === id
+  );
+
+}
+
+
+function getPlayer(
+  teamId,
+  playerId
+){
+
+  const team =
+    getTeam(teamId);
+
+  if(!team){
+    return null;
+  }
+
+  return (
+    team.players || []
+  ).find(
+    p => p.id === playerId
+  ) || null;
+
+}
+
+
+function getPlayerById(
+  playerId
+){
+
+  for(const team of data.teams){
+
+    const player =
+      (team.players || [])
+        .find(
+          p => p.id === playerId
+        );
+
+    if(player){
+      return player;
+    }
+
+  }
+
+  return null;
+
 }
 
 
@@ -1088,18 +1909,24 @@ function getRound(id){
   return data.rounds.find(
     r => r.id === id
   );
+
 }
 
 
-function getMatch(roundId,matchId){
+function getMatch(
+  roundId,
+  matchId
+){
 
-  const round = getRound(roundId);
+  const round =
+    getRound(roundId);
 
   return round
     ? round.matches.find(
         m => m.id === matchId
       )
     : null;
+
 }
 
 
@@ -1115,27 +1942,71 @@ function allMatches(){
         })
       )
   );
+
 }
 
 
 function toast(msg){
 
   const el =
-    document.getElementById('toast');
+    document.getElementById(
+      'toast'
+    );
 
   el.textContent = msg;
 
   el.classList.add('show');
 
-  clearTimeout(toast._t);
-
-  toast._t = setTimeout(
-    () => el.classList.remove('show'),
-    1800
+  clearTimeout(
+    toast._t
   );
+
+  toast._t =
+    setTimeout(
+      () =>
+        el.classList.remove(
+          'show'
+        ),
+      1800
+    );
+
 }
 
 
+function playerDisplayName(
+  teamId,
+  playerId
+){
+
+  const player =
+    getPlayer(
+      teamId,
+      playerId
+    );
+
+  return player
+    ? player.name
+    : '';
+
+}
+
+
+function normalizeName(
+  value
+){
+
+  return String(
+    value || ''
+  )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =========================================================
+   SCORING
+   ========================================================= */
 
 function computeMatchPoints(
   pred,
@@ -1154,6 +2025,7 @@ function computeMatchPoints(
       total:0,
       parts:[]
     };
+
   }
 
 
@@ -1161,6 +2033,10 @@ function computeMatchPoints(
 
   let total = 0;
 
+
+  /*
+   * Winner
+   */
   const predWinner =
     pred.homeScore > pred.awayScore
       ? 'home'
@@ -1185,10 +2061,13 @@ function computeMatchPoints(
       'Rigtig vinder +' +
       settings.winner
     );
+
   }
 
 
-
+  /*
+   * Exact goals
+   */
   let exactCount = 0;
 
 
@@ -1205,6 +2084,7 @@ function computeMatchPoints(
       'Præcist hjemme-antal +' +
       settings.exact
     );
+
   }
 
 
@@ -1221,9 +2101,13 @@ function computeMatchPoints(
       'Præcist ude-antal +' +
       settings.exact
     );
+
   }
 
 
+  /*
+   * Perfect score
+   */
   if(exactCount === 2){
 
     total += settings.bonus;
@@ -1232,64 +2116,124 @@ function computeMatchPoints(
       'Fuld pletskud-bonus +' +
       settings.bonus
     );
+
   }
 
+
+  /*
+   * Topscorers
+   *
+   * New format:
+   *   pred.homeScorerId
+   *
+   * Old format:
+   *   pred.homeScorer
+   *
+   * This keeps old data working.
+   */
 
   const homeScorers =
-    (result.homeScorers || [])
-      .map(
-        s =>
-          (s.name || '')
-            .trim()
-            .toLowerCase()
-      )
-      .filter(Boolean);
-
+    result.homeScorers || [];
 
   const awayScorers =
-    (result.awayScorers || [])
-      .map(
+    result.awayScorers || [];
+
+
+  if(pred.homeScorerId){
+
+    const correct =
+      homeScorers.some(
         s =>
-          (s.name || '')
-            .trim()
-            .toLowerCase()
-      )
-      .filter(Boolean);
+          s.playerId ===
+          pred.homeScorerId
+      );
 
 
-  if(
-    pred.homeScorer &&
-    homeScorers.includes(
-      pred.homeScorer
-        .trim()
-        .toLowerCase()
-    )
-  ){
+    if(correct){
 
-    total += settings.topscorer;
+      total += settings.topscorer;
 
-    parts.push(
-      'Topscorer hjemme +' +
-      settings.topscorer
-    );
+      parts.push(
+        'Topscorer hjemme +' +
+        settings.topscorer
+      );
+
+    }
+
+  }else if(pred.homeScorer){
+
+    const correct =
+      homeScorers.some(
+        s =>
+          normalizeName(
+            s.name
+          ) ===
+          normalizeName(
+            pred.homeScorer
+          )
+      );
+
+
+    if(correct){
+
+      total += settings.topscorer;
+
+      parts.push(
+        'Topscorer hjemme +' +
+        settings.topscorer
+      );
+
+    }
+
   }
 
 
-  if(
-    pred.awayScorer &&
-    awayScorers.includes(
-      pred.awayScorer
-        .trim()
-        .toLowerCase()
-    )
-  ){
+  if(pred.awayScorerId){
 
-    total += settings.topscorer;
+    const correct =
+      awayScorers.some(
+        s =>
+          s.playerId ===
+          pred.awayScorerId
+      );
 
-    parts.push(
-      'Topscorer ude +' +
-      settings.topscorer
-    );
+
+    if(correct){
+
+      total += settings.topscorer;
+
+      parts.push(
+        'Topscorer ude +' +
+        settings.topscorer
+      );
+
+    }
+
+  }else if(pred.awayScorer){
+
+    const correct =
+      awayScorers.some(
+        s =>
+          normalizeName(
+            s.name
+          ) ===
+          normalizeName(
+            pred.awayScorer
+          )
+      );
+
+
+    if(correct){
+
+      total += settings.topscorer;
+
+      parts.push(
+        'Topscorer ude +' +
+        settings.topscorer
+      );
+
+    }
+
   }
 
 
@@ -1297,6 +2241,7 @@ function computeMatchPoints(
     total,
     parts
   };
+
 }
 
 
@@ -1322,10 +2267,12 @@ function playerTotal(player){
         m.result,
         data.settings
       ).total;
+
   }
 
 
   return total;
+
 }
 
 
@@ -1362,12 +2309,18 @@ function playerTotalByRound(
         m.result,
         data.settings
       ).total;
+
   }
 
 
   return total;
+
 }
 
+
+/* =========================================================
+   RENDER
+   ========================================================= */
 
 function render(){
 
@@ -1384,35 +2337,47 @@ function render(){
 
 
   const app =
-    document.getElementById('app');
+    document.getElementById(
+      'app'
+    );
 
 
   if(activeTab === 'predictions'){
+
     app.innerHTML =
       renderPredictions();
 
   }else if(activeTab === 'rounds'){
+
     app.innerHTML =
       renderRounds();
 
   }else if(activeTab === 'results'){
+
     app.innerHTML =
       renderResults();
 
   }else if(activeTab === 'standings'){
+
     app.innerHTML =
       renderStandings();
 
   }else if(activeTab === 'settings'){
+
     app.innerHTML =
       renderSettings();
+
   }
 
 
   attachHandlers();
+
 }
 
 
+/* =========================================================
+   PREDICTIONS
+   ========================================================= */
 
 function renderPredictions(){
 
@@ -1423,6 +2388,7 @@ function renderPredictions(){
 
     predRoundId =
       data.rounds[0].id;
+
   }
 
 
@@ -1430,7 +2396,7 @@ function renderPredictions(){
     data.rounds
       .map(
         r =>
-          `<option value="${r.id}" ${
+          `<option value="${escapeHtml(r.id)}" ${
             r.id === predRoundId
               ? 'selected'
               : ''
@@ -1444,17 +2410,25 @@ function renderPredictions(){
   if(!data.rounds.length){
 
     return `
+
       <div class="player-switch">
         ${playerBtn('henrik')}
         ${playerBtn('steen')}
       </div>
 
       <div class="empty">
+
         Ingen runder oprettet endnu.
-        Gå til <strong>Runder &amp; Kampe</strong>
-        for at oprette den første runde og tilføje kampe.
+
+        Gå til
+        <strong>Runder &amp; Kampe</strong>
+        for at oprette den første runde
+        og tilføje kampe.
+
       </div>
+
     `;
+
   }
 
 
@@ -1462,54 +2436,91 @@ function renderPredictions(){
     getRound(predRoundId);
 
 
+  if(!round){
+
+    return `
+      <div class="empty">
+        Vælg en gyldig runde.
+      </div>
+    `;
+
+  }
+
+
   const matchesHtml =
     round.matches.length
+
       ? round.matches
-          .map(m =>
-            renderPredictionMatch(m)
+          .map(
+            m =>
+              renderPredictionMatch(m)
           )
           .join('')
 
       : `
+
         <div class="empty">
           Denne runde har ingen kampe endnu.
         </div>
+
       `;
 
 
   return `
+
     <div class="player-switch">
+
       ${playerBtn('henrik')}
+
       ${playerBtn('steen')}
+
     </div>
 
+
     <div class="card round-select">
+
       <div class="row between">
 
         <div>
-          <h2>Vælg runde</h2>
+
+          <h2>
+            Vælg runde
+          </h2>
 
           <div class="subtle">
+
             Forudsigelser for
-            <strong style="color:var(--${activePlayer})">
+
+            <strong
+              style="color:var(--${activePlayer})"
+            >
               ${
                 activePlayer === 'henrik'
                   ? 'Henrik'
                   : 'Steen'
               }
             </strong>
+
           </div>
+
         </div>
 
+
         <select id="predRoundSelect">
+
           ${roundOptions}
+
         </select>
 
       </div>
+
     </div>
 
+
     ${matchesHtml}
+
   `;
+
 }
 
 
@@ -1522,6 +2533,7 @@ function playerBtn(p){
 
 
   return `
+
     <button
       data-player="${p}"
       class="${
@@ -1532,15 +2544,92 @@ function playerBtn(p){
     >
       ${label}
     </button>
+
   `;
+
+}
+
+
+function playerOptions(
+  teamId,
+  selectedId
+){
+
+  const team =
+    getTeam(teamId);
+
+
+  if(!team){
+
+    return `
+      <option value="">
+        Ingen spillere
+      </option>
+    `;
+
+  }
+
+
+  const players =
+    team.players || [];
+
+
+  if(!players.length){
+
+    return `
+      <option value="">
+        Ingen spillere tilføjet
+      </option>
+    `;
+
+  }
+
+
+  return `
+
+    <option value="">
+      Vælg spiller
+    </option>
+
+    ${
+      players
+        .map(
+          p =>
+            `
+              <option
+                value="${escapeHtml(p.id)}"
+                ${
+                  p.id === selectedId
+                    ? 'selected'
+                    : ''
+                }
+              >
+                ${escapeHtml(p.name)}
+                ${
+                  p.position
+                    ? ' – ' +
+                      escapeHtml(
+                        p.position
+                      )
+                    : ''
+                }
+              </option>
+            `
+        )
+        .join('')
+    }
+
+  `;
+
 }
 
 
 function renderPredictionMatch(m){
 
   const pred =
-    data.predictions[activePlayer][m.id] ||
-    {};
+    data.predictions[
+      activePlayer
+    ][m.id] || {};
 
 
   const locked =
@@ -1558,17 +2647,25 @@ function renderPredictionMatch(m){
 
 
   return `
-    <div class="match-card ${
-      locked ? 'locked' : ''
-    }">
+
+    <div
+      class="match-card ${
+        locked ? 'locked' : ''
+      }"
+    >
 
       <div class="match-teams">
 
         <div class="team">
+
           ${escapeHtml(
-            teamName(m.homeTeamId)
+            teamName(
+              m.homeTeamId
+            )
           )}
+
         </div>
+
 
         <div class="score-inputs">
 
@@ -1583,7 +2680,9 @@ function renderPredictionMatch(m){
             ${locked ? 'disabled' : ''}
           >
 
-          <span class="dash">–</span>
+          <span class="dash">
+            –
+          </span>
 
           <input
             type="number"
@@ -1598,10 +2697,15 @@ function renderPredictionMatch(m){
 
         </div>
 
+
         <div class="team away">
+
           ${escapeHtml(
-            teamName(m.awayTeamId)
+            teamName(
+              m.awayTeamId
+            )
           )}
+
         </div>
 
       </div>
@@ -1614,21 +2718,24 @@ function renderPredictionMatch(m){
           <label>
             Topscorer,
             ${escapeHtml(
-              teamName(m.homeTeamId)
+              teamName(
+                m.homeTeamId
+              )
             )}
           </label>
 
-          <input
-            type="text"
-            list="scorerNames"
-            placeholder="Navn"
+          <select
             data-mid="${m.id}"
-            data-field="homeScorer"
-            value="${escapeHtml(
-              pred.homeScorer || ''
-            )}"
+            data-field="homeScorerId"
             ${locked ? 'disabled' : ''}
           >
+
+            ${playerOptions(
+              m.homeTeamId,
+              pred.homeScorerId
+            )}
+
+          </select>
 
         </div>
 
@@ -1638,21 +2745,24 @@ function renderPredictionMatch(m){
           <label>
             Topscorer,
             ${escapeHtml(
-              teamName(m.awayTeamId)
+              teamName(
+                m.awayTeamId
+              )
             )}
           </label>
 
-          <input
-            type="text"
-            list="scorerNames"
-            placeholder="Navn"
+          <select
             data-mid="${m.id}"
-            data-field="awayScorer"
-            value="${escapeHtml(
-              pred.awayScorer || ''
-            )}"
+            data-field="awayScorerId"
             ${locked ? 'disabled' : ''}
           >
+
+            ${playerOptions(
+              m.awayTeamId,
+              pred.awayScorerId
+            )}
+
+          </select>
 
         </div>
 
@@ -1665,16 +2775,24 @@ function renderPredictionMatch(m){
           locked
 
             ? `
+
               <span class="badge locked">
+
                 Låst – resultat:
                 ${m.result.homeScore}–${m.result.awayScore}
+
               </span>
+
             `
 
             : `
+
               <span class="badge">
+
                 Åben for forudsigelse
+
               </span>
+
             `
         }
 
@@ -1683,25 +2801,35 @@ function renderPredictionMatch(m){
           locked
 
             ? `
-              <span class="badge points ${
-                pts.total === 0
-                  ? 'zero'
-                  : ''
-              }">
+
+              <span
+                class="badge points ${
+                  pts.total === 0
+                    ? 'zero'
+                    : ''
+                }"
+              >
                 ${pts.total} point
               </span>
+
             `
 
             : ''
+
         }
 
       </div>
 
     </div>
+
   `;
+
 }
 
 
+/* =========================================================
+   ROUNDS
+   ========================================================= */
 
 function renderRounds(){
 
@@ -1709,9 +2837,11 @@ function renderRounds(){
     data.teams
       .map(
         t =>
-          `<option value="${t.id}">
-            ${escapeHtml(t.name)}
-          </option>`
+          `
+            <option value="${escapeHtml(t.id)}">
+              ${escapeHtml(t.name)}
+            </option>
+          `
       )
       .join('');
 
@@ -1728,20 +2858,30 @@ function renderRounds(){
       .join('') ||
 
     `
+
       <div class="empty">
-        Ingen runder endnu — opret den første herunder.
+
+        Ingen runder endnu —
+        opret den første herunder.
+
       </div>
+
     `;
 
 
   return `
+
     <div class="card">
 
-      <h2>Opret ny runde</h2>
+      <h2>
+        Opret ny runde
+      </h2>
 
       <div class="subtle">
+
         F.eks. "Runde 1" … "Runde 26",
         eller "Slutspil – gruppe A, kamp 1".
+
       </div>
 
       <div
@@ -1768,7 +2908,9 @@ function renderRounds(){
     </div>
 
     ${roundsHtml}
+
   `;
+
 }
 
 
@@ -1776,11 +2918,16 @@ function nextRoundName(){
 
   const n =
     data.rounds.filter(
-      r => /^Runde \d+$/.test(r.name)
+      r =>
+        /^Runde \d+$/.test(
+          r.name
+        )
     ).length;
 
 
-  return 'Runde ' + (n + 1);
+  return 'Runde ' +
+    (n + 1);
+
 }
 
 
@@ -1790,69 +2937,86 @@ function renderRoundBlock(
 ){
 
   const open =
-    openRounds.has(r.id);
+    openRounds.has(
+      r.id
+    );
 
 
   const matchesHtml =
     r.matches.length
 
-      ? r.matches.map(
-          m => `
-            <div class="mini-match">
+      ? r.matches
+          .map(
+            m =>
+              `
 
-              <span>
+                <div class="mini-match">
 
-                ${escapeHtml(
-                  teamName(m.homeTeamId)
-                )}
+                  <span>
 
-                <span class="subtle mono">
-                  vs
-                </span>
+                    ${escapeHtml(
+                      teamName(
+                        m.homeTeamId
+                      )
+                    )}
 
-                ${escapeHtml(
-                  teamName(m.awayTeamId)
-                )}
+                    <span class="subtle mono">
+                      vs
+                    </span>
 
-                ${
-                  m.result
+                    ${escapeHtml(
+                      teamName(
+                        m.awayTeamId
+                      )
+                    )}
 
-                    ? `
-                      <span
-                        class="badge locked"
-                        style="margin-left:8px;"
-                      >
-                        ${m.result.homeScore}–${m.result.awayScore}
-                      </span>
-                    `
+                    ${
+                      m.result
 
-                    : ''
-                }
+                        ? `
 
-              </span>
+                          <span
+                            class="badge locked"
+                            style="margin-left:8px;"
+                          >
+                            ${m.result.homeScore}–${m.result.awayScore}
+                          </span>
 
-              <button
-                class="btn small danger"
-                data-del-match="${r.id}|${m.id}"
-              >
-                Fjern
-              </button>
+                        `
 
-            </div>
-          `
-        ).join('')
+                        : ''
+                    }
+
+                  </span>
+
+
+                  <button
+                    class="btn small danger"
+                    data-del-match="${r.id}|${m.id}"
+                  >
+                    Fjern
+                  </button>
+
+                </div>
+
+              `
+          )
+          .join('')
 
       : `
+
         <div
           class="subtle"
           style="padding:8px 0;"
         >
           Ingen kampe i denne runde endnu.
         </div>
+
       `;
 
 
   return `
+
     <div class="round-block">
 
       <div
@@ -1861,12 +3025,17 @@ function renderRoundBlock(
       >
 
         <h3>
-          ${escapeHtml(r.name)}
+
+          ${escapeHtml(
+            r.name
+          )}
 
           <span class="subtle">
             (${r.matches.length} kampe)
           </span>
+
         </h3>
+
 
         <div class="row">
 
@@ -1882,9 +3051,11 @@ function renderRoundBlock(
       </div>
 
 
-      <div class="round-body ${
-        open ? 'open' : ''
-      }">
+      <div
+        class="round-body ${
+          open ? 'open' : ''
+        }"
+      >
 
         ${matchesHtml}
 
@@ -1894,11 +3065,13 @@ function renderRoundBlock(
           <select
             data-home-select="${r.id}"
           >
+
             <option value="">
               Hjemmehold
             </option>
 
             ${teamOptions}
+
           </select>
 
 
@@ -1910,11 +3083,13 @@ function renderRoundBlock(
           <select
             data-away-select="${r.id}"
           >
+
             <option value="">
               Udehold
             </option>
 
             ${teamOptions}
+
           </select>
 
 
@@ -1930,10 +3105,15 @@ function renderRoundBlock(
       </div>
 
     </div>
+
   `;
+
 }
 
 
+/* =========================================================
+   RESULTS
+   ========================================================= */
 
 function renderResults(){
 
@@ -1944,18 +3124,24 @@ function renderResults(){
 
     resultRoundId =
       data.rounds[0].id;
+
   }
 
 
   if(!data.rounds.length){
 
     return `
+
       <div class="empty">
+
         Opret runder og kampe under
         <strong>Runder &amp; Kampe</strong>
         først.
+
       </div>
+
     `;
+
   }
 
 
@@ -1963,19 +3149,37 @@ function renderResults(){
     data.rounds
       .map(
         r =>
-          `<option value="${r.id}" ${
-            r.id === resultRoundId
-              ? 'selected'
-              : ''
-          }>
-            ${escapeHtml(r.name)}
-          </option>`
+          `
+            <option
+              value="${escapeHtml(r.id)}"
+              ${
+                r.id === resultRoundId
+                  ? 'selected'
+                  : ''
+              }
+            >
+              ${escapeHtml(r.name)}
+            </option>
+          `
       )
       .join('');
 
 
   const round =
-    getRound(resultRoundId);
+    getRound(
+      resultRoundId
+    );
+
+
+  if(!round){
+
+    return `
+      <div class="empty">
+        Vælg en gyldig runde.
+      </div>
+    `;
+
+  }
 
 
   const matchesHtml =
@@ -1992,13 +3196,18 @@ function renderResults(){
           .join('')
 
       : `
+
         <div class="empty">
+
           Denne runde har ingen kampe endnu.
+
         </div>
+
       `;
 
 
   return `
+
     <div class="card">
 
       <div class="row between">
@@ -2008,7 +3217,9 @@ function renderResults(){
         </h2>
 
         <select id="resultRoundSelect">
+
           ${roundOptions}
+
         </select>
 
       </div>
@@ -2016,7 +3227,103 @@ function renderResults(){
     </div>
 
     ${matchesHtml}
+
   `;
+
+}
+
+
+function resultScorerOptions(
+  teamId,
+  scorer
+){
+
+  /*
+   * Prefer the player ID.
+   *
+   * For old results where only a name
+   * exists, attempt to match the name.
+   */
+
+  const selectedId =
+    scorer?.playerId || '';
+
+
+  const selectedName =
+    scorer?.name || '';
+
+
+  const team =
+    getTeam(
+      teamId
+    );
+
+
+  const players =
+    team?.players || [];
+
+
+  if(!players.length){
+
+    return `
+      <option value="">
+        Ingen spillere tilføjet
+      </option>
+    `;
+
+  }
+
+
+  let html = `
+    <option value="">
+      Vælg spiller
+    </option>
+  `;
+
+
+  players.forEach(
+    p => {
+
+      const selected =
+        selectedId
+          ? p.id === selectedId
+          : normalizeName(
+              p.name
+            ) ===
+            normalizeName(
+              selectedName
+            );
+
+
+      html += `
+
+        <option
+          value="${escapeHtml(p.id)}"
+          ${
+            selected
+              ? 'selected'
+              : ''
+          }
+        >
+          ${escapeHtml(p.name)}
+          ${
+            p.position
+              ? ' – ' +
+                escapeHtml(
+                  p.position
+                )
+              : ''
+          }
+        </option>
+
+      `;
+
+    }
+  );
+
+
+  return html;
+
 }
 
 
@@ -2032,12 +3339,28 @@ function renderResultMatch(
       homeScore:'',
       awayScore:'',
       homeScorers:[
-        {name:'',goals:''},
-        {name:'',goals:''}
+        {
+          playerId:'',
+          name:'',
+          goals:''
+        },
+        {
+          playerId:'',
+          name:'',
+          goals:''
+        }
       ],
       awayScorers:[
-        {name:'',goals:''},
-        {name:'',goals:''}
+        {
+          playerId:'',
+          name:'',
+          goals:''
+        },
+        {
+          playerId:'',
+          name:'',
+          goals:''
+        }
       ]
     };
 
@@ -2049,8 +3372,16 @@ function renderResultMatch(
       ? res.homeScorers
 
       : [
-          {name:'',goals:''},
-          {name:'',goals:''}
+          {
+            playerId:'',
+            name:'',
+            goals:''
+          },
+          {
+            playerId:'',
+            name:'',
+            goals:''
+          }
         ];
 
 
@@ -2061,12 +3392,21 @@ function renderResultMatch(
       ? res.awayScorers
 
       : [
-          {name:'',goals:''},
-          {name:'',goals:''}
+          {
+            playerId:'',
+            name:'',
+            goals:''
+          },
+          {
+            playerId:'',
+            name:'',
+            goals:''
+          }
         ];
 
 
   return `
+
     <div
       class="result-card"
       data-round="${round.id}"
@@ -2076,9 +3416,13 @@ function renderResultMatch(
       <div class="match-teams">
 
         <div class="team">
+
           ${escapeHtml(
-            teamName(m.homeTeamId)
+            teamName(
+              m.homeTeamId
+            )
           )}
+
         </div>
 
 
@@ -2091,7 +3435,9 @@ function renderResultMatch(
             value="${res.homeScore ?? ''}"
           >
 
-          <span class="dash">–</span>
+          <span class="dash">
+            –
+          </span>
 
           <input
             type="number"
@@ -2104,9 +3450,13 @@ function renderResultMatch(
 
 
         <div class="team away">
+
           ${escapeHtml(
-            teamName(m.awayTeamId)
+            teamName(
+              m.awayTeamId
+            )
           )}
+
         </div>
 
       </div>
@@ -2117,38 +3467,51 @@ function renderResultMatch(
         <div>
 
           <h4>
+
             Topscorere,
             ${escapeHtml(
-              teamName(m.homeTeamId)
+              teamName(
+                m.homeTeamId
+              )
             )}
             (op til 2)
+
           </h4>
 
 
           ${[0,1].map(
-            i => `
-              <div class="ts-row">
+            i =>
+              `
 
-                <input
-                  type="text"
-                  data-scorer="home-${i}-name"
-                  placeholder="Navn"
-                  value="${escapeHtml(
-                    hs[i]?.name || ''
-                  )}"
-                  list="scorerNames"
-                >
+                <div class="ts-row">
 
-                <input
-                  type="number"
-                  min="0"
-                  data-scorer="home-${i}-goals"
-                  placeholder="Mål"
-                  value="${hs[i]?.goals ?? ''}"
-                >
+                  <select
+                    data-scorer="home-${i}-player"
+                  >
 
-              </div>
-            `
+                    ${
+                      resultScorerOptions(
+                        m.homeTeamId,
+                        hs[i]
+                      )
+                    }
+
+                  </select>
+
+
+                  <input
+                    type="number"
+                    min="0"
+                    data-scorer="home-${i}-goals"
+                    placeholder="Mål"
+                    value="${
+                      hs[i]?.goals ?? ''
+                    }"
+                  >
+
+                </div>
+
+              `
           ).join('')}
 
         </div>
@@ -2157,38 +3520,51 @@ function renderResultMatch(
         <div>
 
           <h4>
+
             Topscorere,
             ${escapeHtml(
-              teamName(m.awayTeamId)
+              teamName(
+                m.awayTeamId
+              )
             )}
             (op til 2)
+
           </h4>
 
 
           ${[0,1].map(
-            i => `
-              <div class="ts-row">
+            i =>
+              `
 
-                <input
-                  type="text"
-                  data-scorer="away-${i}-name"
-                  placeholder="Navn"
-                  value="${escapeHtml(
-                    as[i]?.name || ''
-                  )}"
-                  list="scorerNames"
-                >
+                <div class="ts-row">
 
-                <input
-                  type="number"
-                  min="0"
-                  data-scorer="away-${i}-goals"
-                  placeholder="Mål"
-                  value="${as[i]?.goals ?? ''}"
-                >
+                  <select
+                    data-scorer="away-${i}-player"
+                  >
 
-              </div>
-            `
+                    ${
+                      resultScorerOptions(
+                        m.awayTeamId,
+                        as[i]
+                      )
+                    }
+
+                  </select>
+
+
+                  <input
+                    type="number"
+                    min="0"
+                    data-scorer="away-${i}-goals"
+                    placeholder="Mål"
+                    value="${
+                      as[i]?.goals ?? ''
+                    }"
+                  >
+
+                </div>
+
+              `
           ).join('')}
 
         </div>
@@ -2200,7 +3576,9 @@ function renderResultMatch(
 
         <span
           class="badge ${
-            m.result ? '' : 'locked'
+            m.result
+              ? ''
+              : 'locked'
           }"
           style="${
             m.result
@@ -2208,11 +3586,13 @@ function renderResultMatch(
               : 'color:var(--muted);border-color:var(--border);'
           }"
         >
+
           ${
             m.result
               ? 'Resultat gemt'
               : 'Ikke spillet / intet resultat endnu'
           }
+
         </span>
 
 
@@ -2222,12 +3602,14 @@ function renderResultMatch(
             m.result
 
               ? `
+
                 <button
                   class="btn small danger"
                   data-clear-result="${round.id}|${m.id}"
                 >
                   Ryd resultat
                 </button>
+
               `
 
               : ''
@@ -2246,21 +3628,32 @@ function renderResultMatch(
       </div>
 
     </div>
+
   `;
+
 }
 
 
+/* =========================================================
+   STANDINGS
+   ========================================================= */
 
 function renderStandings(){
 
   const h =
     playerTotal('henrik');
 
+
   const s =
     playerTotal('steen');
 
+
   const max =
-    Math.max(h,s,1);
+    Math.max(
+      h,
+      s,
+      1
+    );
 
 
   const roundsWithResults =
@@ -2283,6 +3676,7 @@ function renderStandings(){
               r.id
             );
 
+
           const sp =
             playerTotalByRound(
               'steen',
@@ -2291,6 +3685,7 @@ function renderStandings(){
 
 
           return `
+
             <tr>
 
               <td>
@@ -2312,13 +3707,16 @@ function renderStandings(){
               </td>
 
             </tr>
+
           `;
+
         }
       )
       .join('');
 
 
   return `
+
     <div class="card">
 
       <h2>
@@ -2329,16 +3727,25 @@ function renderStandings(){
       <table class="stand">
 
         <tr>
-          <th>Spiller</th>
-          <th style="text-align:right">
+
+          <th>
+            Spiller
+          </th>
+
+          <th
+            style="text-align:right"
+          >
             Point
           </th>
+
         </tr>
 
 
         <tr>
 
-          <td style="color:var(--henrik)">
+          <td
+            style="color:var(--henrik)"
+          >
             Henrik
           </td>
 
@@ -2351,7 +3758,9 @@ function renderStandings(){
 
         <tr>
 
-          <td style="color:var(--steen)">
+          <td
+            style="color:var(--steen)"
+          >
             Steen
           </td>
 
@@ -2431,6 +3840,7 @@ function renderStandings(){
         roundsWithResults.length
 
           ? `
+
             <table class="stand">
 
               <tr>
@@ -2439,11 +3849,15 @@ function renderStandings(){
                   Runde
                 </th>
 
-                <th style="text-align:right">
+                <th
+                  style="text-align:right"
+                >
                   Henrik
                 </th>
 
-                <th style="text-align:right">
+                <th
+                  style="text-align:right"
+                >
                   Steen
                 </th>
 
@@ -2452,12 +3866,15 @@ function renderStandings(){
               ${rowsHtml}
 
             </table>
+
           `
 
           : `
+
             <div class="empty">
               Ingen resultater indtastet endnu.
             </div>
+
           `
       }
 
@@ -2469,6 +3886,7 @@ function renderStandings(){
       <h2>
         Pointsystem
       </h2>
+
 
       <div
         class="subtle"
@@ -2502,53 +3920,348 @@ function renderStandings(){
       </div>
 
     </div>
+
   `;
+
 }
 
 
+/* =========================================================
+   POSITION OPTIONS
+   ========================================================= */
+
+function positionOptions(
+  selected
+){
+
+  return `
+
+    <option value="">
+      Vælg position
+    </option>
+
+    ${
+      POSITIONS
+        .map(
+          position =>
+            `
+              <option
+                value="${escapeHtml(position)}"
+                ${
+                  position === selected
+                    ? 'selected'
+                    : ''
+                }
+              >
+                ${escapeHtml(position)}
+              </option>
+            `
+        )
+        .join('')
+    }
+
+  `;
+
+}
+
+
+/* =========================================================
+   TEAM SETTINGS
+   ========================================================= */
+
+function renderTeamSettingsCard(
+  team
+){
+
+  const open =
+    openTeams.has(
+      team.id
+    );
+
+
+  const players =
+    team.players || [];
+
+
+  const playersHtml =
+    players.length
+
+      ? players
+          .map(
+            player =>
+              renderPlayerEditRow(
+                team,
+                player
+              )
+          )
+          .join('')
+
+      : `
+
+        <div class="empty">
+          Ingen spillere tilføjet endnu.
+        </div>
+
+      `;
+
+
+  return `
+
+    <div class="team-settings-card">
+
+      <div
+        class="team-settings-header"
+        data-toggle-team="${team.id}"
+      >
+
+        <div
+          class="team-settings-title"
+          onclick="event.stopPropagation()"
+        >
+
+          <input
+            type="text"
+            data-team-id="${team.id}"
+            value="${escapeHtml(team.name)}"
+          >
+
+        </div>
+
+
+        <span class="team-settings-count">
+
+          ${players.length}
+          ${
+            players.length === 1
+              ? 'spiller'
+              : 'spillere'
+          }
+
+        </span>
+
+
+        <button
+          class="btn small danger"
+          data-del-team="${team.id}"
+          onclick="event.stopPropagation()"
+        >
+          Fjern
+        </button>
+
+      </div>
+
+
+      <div
+        class="team-settings-body ${
+          open ? 'open' : ''
+        }"
+      >
+
+        <div class="players-list">
+
+          ${playersHtml}
+
+        </div>
+
+
+        <div class="player-add-box">
+
+          <div
+            class="subtle"
+            style="margin-bottom:7px;"
+          >
+            Tilføj spiller
+          </div>
+
+
+          <div class="player-add-fields">
+
+            <input
+              type="text"
+              data-new-player-name="${team.id}"
+              placeholder="Spillernavn"
+            >
+
+
+            <select
+              data-new-player-position="${team.id}"
+            >
+
+              ${positionOptions('')}
+
+            </select>
+
+
+            <button
+              class="btn primary"
+              data-add-player="${team.id}"
+            >
+              Tilføj spiller
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function renderPlayerEditRow(
+  team,
+  player
+){
+
+  const initials =
+    player.name
+      ? player.name
+          .split(/\s+/)
+          .map(
+            x =>
+              x[0]
+          )
+          .join('')
+          .slice(0,2)
+          .toUpperCase()
+      : '?';
+
+
+  return `
+
+    <div
+      class="player-edit-row"
+      data-player-row="${player.id}"
+    >
+
+      ${
+        player.photoUrl
+
+          ? `
+
+            <img
+              class="player-photo"
+              src="${escapeHtml(player.photoUrl)}"
+              alt="${escapeHtml(player.name)}"
+            >
+
+          `
+
+          : `
+
+            <div class="player-photo-placeholder">
+              ${escapeHtml(initials)}
+            </div>
+
+          `
+      }
+
+
+      <div class="player-fields">
+
+        <input
+          type="text"
+          data-player-name="${team.id}|${player.id}"
+          value="${escapeHtml(player.name)}"
+          placeholder="Navn"
+        >
+
+
+        <select
+          data-player-position="${team.id}|${player.id}"
+        >
+
+          ${positionOptions(
+            player.position || ''
+          )}
+
+        </select>
+
+      </div>
+
+
+      <div class="player-actions">
+
+        <label
+          class="photo-upload-label"
+          title="Upload foto"
+        >
+
+          Foto
+
+          <input
+            type="file"
+            class="photo-upload-input"
+            accept="image/*"
+            data-player-photo="${team.id}|${player.id}"
+          >
+
+        </label>
+
+
+        <button
+          class="btn small danger"
+          data-del-player="${team.id}|${player.id}"
+          title="Slet spiller"
+        >
+          ✕
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
 
 function renderSettings(){
 
   const teamsHtml =
     data.teams
       .map(
-        t => `
-          <div class="team-edit-row">
-
-            <input
-              type="text"
-              data-team-id="${t.id}"
-              value="${escapeHtml(t.name)}"
-            >
-
-            <button
-              class="btn small danger"
-              data-del-team="${t.id}"
-            >
-              ✕
-            </button>
-
-          </div>
-        `
+        team =>
+          renderTeamSettingsCard(
+            team
+          )
       )
       .join('');
 
 
   return `
+
     <div class="card">
 
       <h2>
-        Hold
+        Hold &amp; spillere
       </h2>
 
+
       <div class="subtle">
-        Rediger holdnavne eller tilføj/fjern hold
-        (14 hold i Håndboldligaen som standard).
+
+        Rediger holdnavne og administrér
+        spillertrupper. For hver spiller kan du
+        angive navn, position og foto.
+
       </div>
 
 
-      <div class="teams-list">
+      <div
+        class="teams-list"
+        style="margin-top:12px;"
+      >
+
         ${teamsHtml}
+
       </div>
 
 
@@ -2562,6 +4275,7 @@ function renderSettings(){
           id="newTeamName"
           placeholder="Nyt holdnavn"
         >
+
 
         <button
           class="btn"
@@ -2667,8 +4381,12 @@ function renderSettings(){
         Data
       </h2>
 
+
       <div class="subtle">
-        Tag backup, gendan fra fil, eller nulstil alt.
+
+        Tag backup, gendan fra fil,
+        eller nulstil alt.
+
       </div>
 
 
@@ -2719,6 +4437,7 @@ function renderSettings(){
         Deling mellem enheder
       </h2>
 
+
       <div class="subtle">
 
         ${
@@ -2726,28 +4445,51 @@ function renderSettings(){
           window.FIREBASE_CONFIG.apiKey
 
             ? `
+
               Cloud-synkronisering er sat op.
-              Henrik og Steen kan se hinandens data
-              automatisk.
+              Henrik og Steen kan se hinandens
+              hold, spillere, fotos, forudsigelser
+              og resultater automatisk.
+
             `
 
             : `
-              Der er ikke sat cloud-synkronisering op endnu.
-              Data gemmes kun i denne browser.
+
+              Der er ikke sat cloud-synkronisering
+              op endnu. Data gemmes kun i denne browser.
+
             `
         }
 
       </div>
 
+
+      <div
+        class="subtle"
+        style="margin-top:8px;"
+      >
+
+        Fotos gemmes i Firebase Storage.
+        Maksimal billedstørrelse pr. upload er 5 MB.
+
+      </div>
+
     </div>
+
   `;
+
 }
 
 
+/* =========================================================
+   HTML ESCAPING
+   ========================================================= */
 
 function escapeHtml(str){
 
-  return String(str ?? '')
+  return String(
+    str ?? ''
+  )
     .replace(
       /[&<>"']/g,
       c =>
@@ -2759,102 +4501,43 @@ function escapeHtml(str){
           "'":'&#39;'
         }[c])
     );
+
 }
 
 
-
-function collectScorerNames(){
-
-  const names =
-    new Set();
-
-
-  for(const r of data.rounds){
-
-    for(const m of r.matches){
-
-      if(!m.result){
-        continue;
-      }
-
-
-      (m.result.homeScorers || [])
-        .forEach(
-          s => {
-            if(s.name){
-              names.add(s.name);
-            }
-          }
-        );
-
-
-      (m.result.awayScorers || [])
-        .forEach(
-          s => {
-            if(s.name){
-              names.add(s.name);
-            }
-          }
-        );
-    }
-  }
-
-
-  const dl =
-    document.getElementById(
-      'scorerNames'
-    ) ||
-
-    (() => {
-
-      const d =
-        document.createElement(
-          'datalist'
-        );
-
-      d.id = 'scorerNames';
-
-      document.body.appendChild(d);
-
-      return d;
-
-    })();
-
-
-  dl.innerHTML =
-    [...names]
-      .map(
-        n =>
-          `<option value="${escapeHtml(n)}">`
-      )
-      .join('');
-}
-
-
+/* =========================================================
+   EVENT HANDLING
+   ========================================================= */
 
 function attachHandlers(){
 
-  collectScorerNames();
-
-
+  /* =======================================================
+     PREDICTIONS
+     ======================================================= */
 
   if(activeTab === 'predictions'){
 
     document
-      .querySelectorAll('[data-player]')
-      .forEach(btn => {
+      .querySelectorAll(
+        '[data-player]'
+      )
+      .forEach(
+        btn => {
 
-        btn.addEventListener(
-          'click',
-          () => {
+          btn.addEventListener(
+            'click',
+            () => {
 
-            activePlayer =
-              btn.dataset.player;
+              activePlayer =
+                btn.dataset.player;
 
-            render();
-          }
-        );
-      });
+              render();
+
+            }
+          );
+
+        }
+      );
 
 
     const sel =
@@ -2873,69 +4556,140 @@ function attachHandlers(){
             sel.value;
 
           render();
+
         }
       );
+
     }
 
 
     document
-      .querySelectorAll('[data-mid]')
-      .forEach(inp => {
+      .querySelectorAll(
+        '[data-mid]'
+      )
+      .forEach(
+        inp => {
 
-        inp.addEventListener(
-          'change',
-          () => {
+          inp.addEventListener(
+            'change',
+            () => {
 
-            const mid =
-              inp.dataset.mid;
+              const mid =
+                inp.dataset.mid;
 
-            const field =
-              inp.dataset.field;
-
-
-            const p =
-              data.predictions[
-                activePlayer
-              ];
+              const field =
+                inp.dataset.field;
 
 
-            if(!p[mid]){
-              p[mid] = {};
+              const p =
+                data.predictions[
+                  activePlayer
+                ];
+
+
+              if(!p[mid]){
+
+                p[mid] = {};
+
+              }
+
+
+              let val =
+                inp.value;
+
+
+              if(
+                field === 'homeScore' ||
+                field === 'awayScore'
+              ){
+
+                val =
+                  val === ''
+                    ? null
+                    : parseInt(
+                        val,
+                        10
+                      );
+
+              }
+
+
+              /*
+               * New player dropdown format.
+               */
+              if(
+                field ===
+                  'homeScorerId' ||
+                field ===
+                  'awayScorerId'
+              ){
+
+                p[mid][field] =
+                  val || null;
+
+
+                /*
+                 * Keep the old name fields
+                 * synchronized too. This makes
+                 * exported data easier to read and
+                 * preserves compatibility.
+                 */
+                const teamId =
+                  field ===
+                    'homeScorerId'
+                    ? getMatchById(
+                        mid
+                      )?.homeTeamId
+                    : getMatchById(
+                        mid
+                      )?.awayTeamId;
+
+
+                const player =
+                  teamId && val
+                    ? getPlayer(
+                        teamId,
+                        val
+                      )
+                    : null;
+
+
+                const nameField =
+                  field ===
+                    'homeScorerId'
+                    ? 'homeScorer'
+                    : 'awayScorer';
+
+
+                p[mid][nameField] =
+                  player
+                    ? player.name
+                    : '';
+
+              }else{
+
+                p[mid][field] =
+                  val;
+
+              }
+
+
+              persist();
+
+              render();
+
             }
+          );
 
+        }
+      );
 
-            let val =
-              inp.value;
-
-
-            if(
-              field === 'homeScore' ||
-              field === 'awayScore'
-            ){
-
-              val =
-                val === ''
-                  ? null
-                  : parseInt(
-                      val,
-                      10
-                    );
-            }
-
-
-            p[mid][field] =
-              val;
-
-
-            persist();
-
-            render();
-          }
-        );
-      });
   }
 
 
+  /* =======================================================
+     ROUNDS
+     ======================================================= */
 
   if(activeTab === 'rounds'){
 
@@ -2943,34 +4697,48 @@ function attachHandlers(){
       .querySelectorAll(
         '[data-toggle-round]'
       )
-      .forEach(el => {
+      .forEach(
+        el => {
 
-        el.addEventListener(
-          'click',
-          e => {
+          el.addEventListener(
+            'click',
+            e => {
 
-            if(
-              e.target.closest('button')
-            ){
-              return;
+              if(
+                e.target.closest(
+                  'button'
+                )
+              ){
+
+                return;
+
+              }
+
+
+              const id =
+                el.dataset.toggleRound;
+
+
+              if(
+                openRounds.has(id)
+              ){
+
+                openRounds.delete(id);
+
+              }else{
+
+                openRounds.add(id);
+
+              }
+
+
+              render();
+
             }
+          );
 
-
-            const id =
-              el.dataset.toggleRound;
-
-
-            if(openRounds.has(id)){
-              openRounds.delete(id);
-            }else{
-              openRounds.add(id);
-            }
-
-
-            render();
-          }
-        );
-      });
+        }
+      );
 
 
     const addRoundBtn =
@@ -2996,21 +4764,29 @@ function attachHandlers(){
 
 
           const r = {
+
             id:uid('r'),
+
             name,
+
             matches:[]
+
           };
 
 
           data.rounds.push(r);
 
-          openRounds.add(r.id);
+          openRounds.add(
+            r.id
+          );
 
           persist();
 
           render();
+
         }
       );
+
     }
 
 
@@ -3018,154 +4794,208 @@ function attachHandlers(){
       .querySelectorAll(
         '[data-del-round]'
       )
-      .forEach(btn => {
+      .forEach(
+        btn => {
 
-        btn.addEventListener(
-          'click',
-          () => {
+          btn.addEventListener(
+            'click',
+            () => {
 
-            if(
-              !confirm(
-                'Slet denne runde og alle dens kampe?'
-              )
-            ){
-              return;
+              if(
+                !confirm(
+                  'Slet denne runde og alle dens kampe?'
+                )
+              ){
+
+                return;
+
+              }
+
+
+              data.rounds =
+                data.rounds.filter(
+                  r =>
+                    r.id !==
+                    btn.dataset.delRound
+                );
+
+
+              if(
+                predRoundId ===
+                btn.dataset.delRound
+              ){
+
+                predRoundId =
+                  data.rounds[0]?.id ||
+                  null;
+
+              }
+
+
+              if(
+                resultRoundId ===
+                btn.dataset.delRound
+              ){
+
+                resultRoundId =
+                  data.rounds[0]?.id ||
+                  null;
+
+              }
+
+
+              persist();
+
+              render();
+
             }
+          );
 
-
-            data.rounds =
-              data.rounds.filter(
-                r =>
-                  r.id !==
-                  btn.dataset.delRound
-              );
-
-
-            persist();
-
-            render();
-          }
-        );
-      });
+        }
+      );
 
 
     document
       .querySelectorAll(
         '[data-add-match]'
       )
-      .forEach(btn => {
+      .forEach(
+        btn => {
 
-        btn.addEventListener(
-          'click',
-          () => {
+          btn.addEventListener(
+            'click',
+            () => {
 
-            const rid =
-              btn.dataset.addMatch;
-
-
-            const homeSel =
-              document.querySelector(
-                `[data-home-select="${rid}"]`
-              );
+              const rid =
+                btn.dataset.addMatch;
 
 
-            const awaySel =
-              document.querySelector(
-                `[data-away-select="${rid}"]`
-              );
+              const homeSel =
+                document.querySelector(
+                  `[data-home-select="${rid}"]`
+                );
 
 
-            if(
-              !homeSel.value ||
-              !awaySel.value
-            ){
+              const awaySel =
+                document.querySelector(
+                  `[data-away-select="${rid}"]`
+                );
 
-              toast(
-                'Vælg begge hold'
-              );
 
-              return;
+              if(
+                !homeSel.value ||
+                !awaySel.value
+              ){
+
+                toast(
+                  'Vælg begge hold'
+                );
+
+                return;
+
+              }
+
+
+              if(
+                homeSel.value ===
+                awaySel.value
+              ){
+
+                toast(
+                  'Hold kan ikke møde sig selv'
+                );
+
+                return;
+
+              }
+
+
+              const r =
+                getRound(rid);
+
+
+              if(!r){
+                return;
+              }
+
+
+              r.matches.push({
+
+                id:uid('m'),
+
+                homeTeamId:
+                  homeSel.value,
+
+                awayTeamId:
+                  awaySel.value,
+
+                result:null
+
+              });
+
+
+              persist();
+
+              render();
+
             }
+          );
 
-
-            if(
-              homeSel.value ===
-              awaySel.value
-            ){
-
-              toast(
-                'Hold kan ikke møde sig selv'
-              );
-
-              return;
-            }
-
-
-            const r =
-              getRound(rid);
-
-
-            r.matches.push({
-
-              id:uid('m'),
-
-              homeTeamId:
-                homeSel.value,
-
-              awayTeamId:
-                awaySel.value,
-
-              result:null
-
-            });
-
-
-            persist();
-
-            render();
-          }
-        );
-      });
+        }
+      );
 
 
     document
       .querySelectorAll(
         '[data-del-match]'
       )
-      .forEach(btn => {
+      .forEach(
+        btn => {
 
-        btn.addEventListener(
-          'click',
-          () => {
+          btn.addEventListener(
+            'click',
+            () => {
 
-            const [
-              rid,
-              mid
-            ] =
-              btn.dataset.delMatch
-                .split('|');
-
-
-            const r =
-              getRound(rid);
+              const [
+                rid,
+                mid
+              ] =
+                btn.dataset.delMatch
+                  .split('|');
 
 
-            r.matches =
-              r.matches.filter(
-                m =>
-                  m.id !== mid
-              );
+              const r =
+                getRound(rid);
 
 
-            persist();
+              if(!r){
+                return;
+              }
 
-            render();
-          }
-        );
-      });
+
+              r.matches =
+                r.matches.filter(
+                  m =>
+                    m.id !== mid
+                );
+
+
+              persist();
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
   }
 
 
+  /* =======================================================
+     RESULTS
+     ======================================================= */
 
   if(activeTab === 'results'){
 
@@ -3185,8 +5015,10 @@ function attachHandlers(){
             sel.value;
 
           render();
+
         }
       );
+
     }
 
 
@@ -3194,247 +5026,384 @@ function attachHandlers(){
       .querySelectorAll(
         '[data-save-result]'
       )
-      .forEach(btn => {
+      .forEach(
+        btn => {
 
-        btn.addEventListener(
-          'click',
-          () => {
+          btn.addEventListener(
+            'click',
+            () => {
 
-            const [
-              rid,
-              mid
-            ] =
-              btn.dataset.saveResult
-                .split('|');
-
-
-            const card =
-              btn.closest(
-                '.result-card'
-              );
-
-
-            const homeScore =
-              parseInt(
-                card.querySelector(
-                  '[data-rfield="homeScore"]'
-                ).value,
-                10
-              );
-
-
-            const awayScore =
-              parseInt(
-                card.querySelector(
-                  '[data-rfield="awayScore"]'
-                ).value,
-                10
-              );
-
-
-            if(
-              isNaN(homeScore) ||
-              isNaN(awayScore)
-            ){
-
-              toast(
-                'Udfyld begge måltal'
-              );
-
-              return;
-            }
-
-
-            const homeScorers =
-              [0,1]
-                .map(
-                  i => ({
-
-                    name:
-                      card
-                        .querySelector(
-                          `[data-scorer="home-${i}-name"]`
-                        )
-                        .value
-                        .trim(),
-
-                    goals:
-                      card
-                        .querySelector(
-                          `[data-scorer="home-${i}-goals"]`
-                        )
-                        .value
-
-                  })
-                )
-                .filter(
-                  s => s.name
-                );
-
-
-            const awayScorers =
-              [0,1]
-                .map(
-                  i => ({
-
-                    name:
-                      card
-                        .querySelector(
-                          `[data-scorer="away-${i}-name"]`
-                        )
-                        .value
-                        .trim(),
-
-                    goals:
-                      card
-                        .querySelector(
-                          `[data-scorer="away-${i}-goals"]`
-                        )
-                        .value
-
-                  })
-                )
-                .filter(
-                  s => s.name
-                );
-
-
-            const m =
-              getMatch(
+              const [
                 rid,
                 mid
+              ] =
+                btn.dataset.saveResult
+                  .split('|');
+
+
+              const card =
+                btn.closest(
+                  '.result-card'
+                );
+
+
+              const homeScore =
+                parseInt(
+                  card.querySelector(
+                    '[data-rfield="homeScore"]'
+                  ).value,
+                  10
+                );
+
+
+              const awayScore =
+                parseInt(
+                  card.querySelector(
+                    '[data-rfield="awayScore"]'
+                  ).value,
+                  10
+                );
+
+
+              if(
+                isNaN(homeScore) ||
+                isNaN(awayScore)
+              ){
+
+                toast(
+                  'Udfyld begge måltal'
+                );
+
+                return;
+
+              }
+
+
+              const m =
+                getMatch(
+                  rid,
+                  mid
+                );
+
+
+              if(!m){
+                return;
+              }
+
+
+              const homeScorers =
+                [0,1]
+                  .map(
+                    i => {
+
+                      const playerId =
+                        card
+                          .querySelector(
+                            `[data-scorer="home-${i}-player"]`
+                          )
+                          .value;
+
+
+                      const goals =
+                        card
+                          .querySelector(
+                            `[data-scorer="home-${i}-goals"]`
+                          )
+                          .value;
+
+
+                      const player =
+                        playerId
+                          ? getPlayer(
+                              m.homeTeamId,
+                              playerId
+                            )
+                          : null;
+
+
+                      return {
+
+                        playerId:
+                          playerId || '',
+
+                        name:
+                          player
+                            ? player.name
+                            : '',
+
+                        goals
+
+                      };
+
+                    }
+                  )
+                  .filter(
+                    s =>
+                      s.playerId
+                  );
+
+
+              const awayScorers =
+                [0,1]
+                  .map(
+                    i => {
+
+                      const playerId =
+                        card
+                          .querySelector(
+                            `[data-scorer="away-${i}-player"]`
+                          )
+                          .value;
+
+
+                      const goals =
+                        card
+                          .querySelector(
+                            `[data-scorer="away-${i}-goals"]`
+                          )
+                          .value;
+
+
+                      const player =
+                        playerId
+                          ? getPlayer(
+                              m.awayTeamId,
+                              playerId
+                            )
+                          : null;
+
+
+                      return {
+
+                        playerId:
+                          playerId || '',
+
+                        name:
+                          player
+                            ? player.name
+                            : '',
+
+                        goals
+
+                      };
+
+                    }
+                  )
+                  .filter(
+                    s =>
+                      s.playerId
+                  );
+
+
+              m.result = {
+
+                homeScore,
+
+                awayScore,
+
+                homeScorers,
+
+                awayScorers
+
+              };
+
+
+              persist();
+
+              render();
+
+              toast(
+                'Resultat gemt'
               );
 
+            }
+          );
 
-            m.result = {
-
-              homeScore,
-
-              awayScore,
-
-              homeScorers,
-
-              awayScorers
-            };
-
-
-            persist();
-
-            render();
-
-            toast(
-              'Resultat gemt'
-            );
-          }
-        );
-      });
+        }
+      );
 
 
     document
       .querySelectorAll(
         '[data-clear-result]'
       )
-      .forEach(btn => {
+      .forEach(
+        btn => {
 
-        btn.addEventListener(
-          'click',
-          () => {
+          btn.addEventListener(
+            'click',
+            () => {
 
-            const [
-              rid,
-              mid
-            ] =
-              btn.dataset.clearResult
-                .split('|');
-
-
-            const m =
-              getMatch(
+              const [
                 rid,
                 mid
-              );
+              ] =
+                btn.dataset.clearResult
+                  .split('|');
 
 
-            m.result = null;
+              const m =
+                getMatch(
+                  rid,
+                  mid
+                );
 
-            persist();
 
-            render();
-          }
-        );
-      });
+              if(!m){
+                return;
+              }
+
+
+              m.result = null;
+
+
+              persist();
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
   }
 
 
+  /* =======================================================
+     SETTINGS
+     ======================================================= */
 
   if(activeTab === 'settings'){
 
+    /*
+     * Expand/collapse teams
+     */
+    document
+      .querySelectorAll(
+        '[data-toggle-team]'
+      )
+      .forEach(
+        el => {
+
+          el.addEventListener(
+            'click',
+            () => {
+
+              const id =
+                el.dataset.toggleTeam;
+
+
+              if(
+                openTeams.has(id)
+              ){
+
+                openTeams.delete(id);
+
+              }else{
+
+                openTeams.add(id);
+
+              }
+
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * Team names
+     */
     document
       .querySelectorAll(
         '[data-team-id]'
       )
-      .forEach(inp => {
+      .forEach(
+        inp => {
 
-        inp.addEventListener(
-          'change',
-          () => {
+          inp.addEventListener(
+            'change',
+            () => {
 
-            const t =
-              data.teams.find(
-                t =>
-                  t.id ===
-                  inp.dataset.teamId
-              );
+              const t =
+                data.teams.find(
+                  t =>
+                    t.id ===
+                    inp.dataset.teamId
+                );
 
 
-            if(t){
+              if(t){
 
-              t.name =
-                inp.value.trim() ||
-                t.name;
+                t.name =
+                  inp.value.trim() ||
+                  t.name;
 
-              persist();
+                persist();
+
+                render();
+
+              }
+
             }
-          }
-        );
-      });
+          );
+
+        }
+      );
 
 
+    /*
+     * Delete teams
+     */
     document
       .querySelectorAll(
         '[data-del-team]'
       )
-      .forEach(btn => {
+      .forEach(
+        btn => {
 
-        btn.addEventListener(
-          'click',
-          () => {
+          btn.addEventListener(
+            'click',
+            () => {
 
-            if(
-              !confirm(
-                'Fjern dette hold? (Påvirker ikke allerede oprettede kampe)'
-              )
-            ){
-              return;
+              if(
+                !confirm(
+                  'Fjern dette hold? Kampe, der allerede er oprettet med holdet, påvirkes ikke.'
+                )
+              ){
+
+                return;
+
+              }
+
+
+              data.teams =
+                data.teams.filter(
+                  t =>
+                    t.id !==
+                    btn.dataset.delTeam
+                );
+
+
+              persist();
+
+              render();
+
             }
+          );
+
+        }
+      );
 
 
-            data.teams =
-              data.teams.filter(
-                t =>
-                  t.id !==
-                  btn.dataset.delTeam
-              );
-
-
-            persist();
-
-            render();
-          }
-        );
-      });
-
-
+    /*
+     * Add team
+     */
     const addTeamBtn =
       document.getElementById(
         'addTeamBtn'
@@ -3453,29 +5422,516 @@ function attachHandlers(){
             );
 
 
-          if(!inp.value.trim()){
+          const name =
+            inp.value.trim();
+
+
+          if(!name){
             return;
           }
 
 
-          data.teams.push({
+          const team = {
 
             id:uid('t'),
 
-            name:
-              inp.value.trim()
+            name,
 
-          });
+            players:[]
+
+          };
+
+
+          data.teams.push(
+            team
+          );
+
+
+          openTeams.add(
+            team.id
+          );
 
 
           persist();
 
           render();
+
         }
       );
+
     }
 
 
+    /*
+     * Add players
+     */
+    document
+      .querySelectorAll(
+        '[data-add-player]'
+      )
+      .forEach(
+        btn => {
+
+          btn.addEventListener(
+            'click',
+            () => {
+
+              const teamId =
+                btn.dataset.addPlayer;
+
+
+              const nameInput =
+                document.querySelector(
+                  `[data-new-player-name="${teamId}"]`
+                );
+
+
+              const positionInput =
+                document.querySelector(
+                  `[data-new-player-position="${teamId}"]`
+                );
+
+
+              const name =
+                nameInput.value.trim();
+
+
+              if(!name){
+
+                toast(
+                  'Indtast spillerens navn'
+                );
+
+                return;
+
+              }
+
+
+              const team =
+                getTeam(
+                  teamId
+                );
+
+
+              if(!team){
+                return;
+              }
+
+
+              if(
+                (team.players || [])
+                  .some(
+                    p =>
+                      normalizeName(
+                        p.name
+                      ) ===
+                      normalizeName(
+                        name
+                      )
+                  )
+              ){
+
+                toast(
+                  'Denne spiller findes allerede'
+                );
+
+                return;
+
+              }
+
+
+              const player = {
+
+                id:uid('p'),
+
+                name,
+
+                position:
+                  positionInput.value ||
+                  '',
+
+                photoUrl:'',
+
+                createdAt:
+                  Date.now()
+
+              };
+
+
+              if(
+                !Array.isArray(
+                  team.players
+                )
+              ){
+
+                team.players = [];
+
+              }
+
+
+              team.players.push(
+                player
+              );
+
+
+              openTeams.add(
+                teamId
+              );
+
+
+              persist();
+
+              render();
+
+              toast(
+                'Spiller tilføjet'
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * Player names
+     */
+    document
+      .querySelectorAll(
+        '[data-player-name]'
+      )
+      .forEach(
+        inp => {
+
+          inp.addEventListener(
+            'change',
+            () => {
+
+              const [
+                teamId,
+                playerId
+              ] =
+                inp.dataset.playerName
+                  .split('|');
+
+
+              const player =
+                getPlayer(
+                  teamId,
+                  playerId
+                );
+
+
+              if(!player){
+                return;
+              }
+
+
+              const name =
+                inp.value.trim();
+
+
+              if(name){
+
+                player.name =
+                  name;
+
+                persist();
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * Player positions
+     */
+    document
+      .querySelectorAll(
+        '[data-player-position]'
+      )
+      .forEach(
+        select => {
+
+          select.addEventListener(
+            'change',
+            () => {
+
+              const [
+                teamId,
+                playerId
+              ] =
+                select.dataset.playerPosition
+                  .split('|');
+
+
+              const player =
+                getPlayer(
+                  teamId,
+                  playerId
+                );
+
+
+              if(!player){
+                return;
+              }
+
+
+              player.position =
+                select.value;
+
+
+              persist();
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * Delete player
+     */
+    document
+      .querySelectorAll(
+        '[data-del-player]'
+      )
+      .forEach(
+        btn => {
+
+          btn.addEventListener(
+            'click',
+            () => {
+
+              const [
+                teamId,
+                playerId
+              ] =
+                btn.dataset.delPlayer
+                  .split('|');
+
+
+              const team =
+                getTeam(
+                  teamId
+                );
+
+
+              if(!team){
+                return;
+              }
+
+
+              const player =
+                getPlayer(
+                  teamId,
+                  playerId
+                );
+
+
+              if(
+                !player ||
+                !confirm(
+                  `Slet ${player.name}?`
+                )
+              ){
+
+                return;
+
+              }
+
+
+              team.players =
+                team.players.filter(
+                  p =>
+                    p.id !==
+                    playerId
+                );
+
+
+              /*
+               * Clear old predictions that
+               * referenced this player.
+               */
+              for(
+                const playerPredictions
+                of Object.values(
+                  data.predictions
+                )
+              ){
+
+                for(
+                  const pred
+                  of Object.values(
+                    playerPredictions
+                  )
+                ){
+
+                  if(
+                    pred.homeScorerId ===
+                    playerId
+                  ){
+
+                    pred.homeScorerId =
+                      null;
+
+                    pred.homeScorer =
+                      '';
+
+                  }
+
+
+                  if(
+                    pred.awayScorerId ===
+                    playerId
+                  ){
+
+                    pred.awayScorerId =
+                      null;
+
+                    pred.awayScorer =
+                      '';
+
+                  }
+
+                }
+
+              }
+
+
+              persist();
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * Player photo upload
+     */
+    document
+      .querySelectorAll(
+        '[data-player-photo]'
+      )
+      .forEach(
+        input => {
+
+          input.addEventListener(
+            'change',
+            async () => {
+
+              const file =
+                input.files[0];
+
+
+              if(!file){
+                return;
+              }
+
+
+              const [
+                teamId,
+                playerId
+              ] =
+                input.dataset.playerPhoto
+                  .split('|');
+
+
+              const player =
+                getPlayer(
+                  teamId,
+                  playerId
+                );
+
+
+              if(!player){
+                return;
+              }
+
+
+              /*
+               * If Firebase isn't available,
+               * we cannot persist the image
+               * between devices.
+               */
+              if(!fbStorage){
+
+                alert(
+                  'Firebase Storage er ikke tilgængelig. Kontroller at Firebase er korrekt konfigureret.'
+                );
+
+                input.value = '';
+
+                return;
+
+              }
+
+
+              try{
+
+                toast(
+                  'Uploader foto...'
+                );
+
+
+                const url =
+                  await uploadPlayerPhoto(
+                    teamId,
+                    playerId,
+                    file
+                  );
+
+
+                player.photoUrl =
+                  url;
+
+
+                persist();
+
+                render();
+
+                toast(
+                  'Foto gemt'
+                );
+
+              }catch(error){
+
+                console.error(
+                  'Photo upload failed:',
+                  error
+                );
+
+
+                alert(
+                  error.message ||
+                  'Kunne ikke uploade billedet.'
+                );
+
+              }
+
+
+              input.value = '';
+
+            }
+          );
+
+        }
+      );
+
+
+    /*
+     * Save points
+     */
     const saveSettingsBtn =
       document.getElementById(
         'saveSettingsBtn'
@@ -3521,6 +5977,7 @@ function attachHandlers(){
                 ).value,
                 10
               ) || 0
+
           };
 
 
@@ -3531,11 +5988,16 @@ function attachHandlers(){
           toast(
             'Pointsystem gemt'
           );
+
         }
       );
+
     }
 
 
+    /* =====================================================
+       EXPORT
+       ===================================================== */
 
     const exportBtn =
       document.getElementById(
@@ -3577,7 +6039,9 @@ function attachHandlers(){
             );
 
 
-          a.href = url;
+          a.href =
+            url;
+
 
           a.download =
             'haandboldtips-backup-' +
@@ -3589,11 +6053,20 @@ function attachHandlers(){
 
           a.click();
 
-          URL.revokeObjectURL(url);
+
+          URL.revokeObjectURL(
+            url
+          );
+
         }
       );
+
     }
 
+
+    /* =====================================================
+       IMPORT
+       ===================================================== */
 
     const importBtn =
       document.getElementById(
@@ -3614,6 +6087,7 @@ function attachHandlers(){
         () =>
           importFile.click()
       );
+
     }
 
 
@@ -3655,10 +6129,16 @@ function attachHandlers(){
                 throw new Error(
                   'bad format'
                 );
+
               }
 
 
-              data = parsed;
+              data =
+                parsed;
+
+
+              migrateData();
+
 
               persist();
 
@@ -3670,19 +6150,30 @@ function attachHandlers(){
 
             }catch(e){
 
+              console.error(e);
+
               alert(
                 'Kunne ikke læse filen. Sørg for det er en gyldig backup-fil.'
               );
+
             }
+
           };
 
 
-          reader.readAsText(file);
+          reader.readAsText(
+            file
+          );
+
         }
       );
+
     }
 
 
+    /* =====================================================
+       RESET
+       ===================================================== */
 
     const resetBtn =
       document.getElementById(
@@ -3698,11 +6189,12 @@ function attachHandlers(){
 
           if(
             !confirm(
-              'Dette sletter ALT data (hold, runder, resultater, forudsigelser). Er du sikker?'
+              'Dette sletter ALT data (hold, spillere, fotos, runder, resultater og forudsigelser). Er du sikker?'
             )
           ){
 
             return;
+
           }
 
 
@@ -3710,18 +6202,74 @@ function attachHandlers(){
             defaultData();
 
 
+          predRoundId =
+            null;
+
+
+          resultRoundId =
+            null;
+
+
+          openRounds.clear();
+
+          openTeams.clear();
+
+
           persist();
 
           render();
+
         }
       );
+
     }
+
   }
+
 }
 
 
+/* =========================================================
+   FIND MATCH BY ID
+   ========================================================= */
+
+function getMatchById(
+  matchId
+){
+
+  for(
+    const round
+    of data.rounds
+  ){
+
+    const match =
+      round.matches.find(
+        m =>
+          m.id ===
+          matchId
+      );
+
+
+    if(match){
+      return match;
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =========================================================
+   TAB NAVIGATION
+   ========================================================= */
+
 document
-  .getElementById('tabs')
+  .getElementById(
+    'tabs'
+  )
   .addEventListener(
     'click',
     e => {
@@ -3755,9 +6303,14 @@ document
 
 
       render();
+
     }
   );
 
+
+/* =========================================================
+   BOOT
+   ========================================================= */
 
 render();
 
